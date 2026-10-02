@@ -1,0 +1,13 @@
+{
+  "nota": "Orden y códigos internos de las líneas. Una línea sin 'archivo' (o con su archivo sin niveles) sale como «Próximamente».",
+  "lineas": [
+    { "codigo": 11, "nombre": "Lubricantes", "archivo": "linea-11-lubricantes.json" },
+    { "codigo": 10, "nombre": "Filtros" },
+    { "codigo": 15, "nombre": "Aditivos" },
+    { "codigo": 20, "nombre": "Líquido de freno" },
+    { "codigo": 19, "nombre": "Grasas" },
+    { "codigo": 13, "nombre": "Refrigerantes" },
+    { "codigo": 17, "nombre": "Baterías" },
+    { "codigo": 18, "nombre": "Bujías" }
+  ]
+}

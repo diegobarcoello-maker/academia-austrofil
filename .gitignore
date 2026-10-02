@@ -1,0 +1,5 @@
+deploy_key*
+*.pem
+__pycache__/
+.pytest_cache/
+tests/salida/

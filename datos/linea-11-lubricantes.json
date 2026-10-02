@@ -1,0 +1,501 @@
+{
+  "codigo": 11,
+  "nombre": "Lubricantes",
+  "intro": "La línea principal del negocio. Todo lo que hay que entender, de lo básico a lo técnico.",
+  "niveles": [
+    {
+      "id": "11-N1", "titulo": "Fundamentos",
+      "modulos": [
+        { "id": "11-M01", "titulo": "Qué hace el aceite", "lecciones": [
+          { "id": "11-L01", "titulo": "Qué es lubricar", "contenido": ["lu1.1..lu1.9"], "preguntas": [
+            { "id": "11-L01-P1", "tipo": "opcion", "enunciado": "¿Qué es lubricar?",
+              "opciones": ["Meter entre dos piezas de metal una película de aceite tan fina que no se tocan", "Enfriar el motor con agua y refrigerante", "Llenar el cárter hasta el tope", "Limpiar el motor por fuera"], "correcta": 0,
+              "fuente": { "bloque": "lu1.1" }, "cita": "Lubricar es meter entre ellas una película de aceite tan fina que no se tocan" },
+            { "id": "11-L01-P2", "tipo": "vf", "enunciado": "Reducir la fricción es la única función del aceite dentro del motor.", "correcta": false,
+              "fuente": { "bloque": "lu1.2" }, "cita": "reducir fricción es solo una de las seis cosas que hace el aceite dentro de un motor" },
+            { "id": "11-L01-P3", "tipo": "emparejar", "enunciado": "Empareja cada función del aceite con lo que hace.",
+              "pares": [["Refrigerar", "Se lleva el calor de pistones, cojinetes y árbol de levas"], ["Limpiar", "Arrastra el hollín y lo mantiene en suspensión hasta el filtro"], ["Sellar", "Cierra la holgura entre pistón, anillos y cilindro"], ["Amortiguar", "Absorbe los golpes entre piezas y baja el ruido"]],
+              "fuente": { "bloques": ["lu1.4", "lu1.5", "lu1.6", "lu1.8"] } },
+            { "id": "11-L01-P4", "tipo": "opcion", "enunciado": "¿Cómo se dice el beneficio para que el cliente lo entienda?",
+              "opciones": ["Un motor bien lubricado dura más, gasta menos combustible, entrega su potencia y va menos al taller", "El aceite más caro siempre es el mejor", "El aceite se cambia solo cuando baja el nivel", "El color del aceite dice su calidad"], "correcta": 0,
+              "fuente": { "bloque": "lu1.9" }, "cita": "Un motor bien lubricado dura más, gasta menos combustible, entrega su potencia y va menos al taller." },
+            { "id": "11-L01-P5", "tipo": "vf", "enunciado": "El aceite también protege: neutraliza los ácidos de la combustión y cubre el metal para que no se corroa con el motor apagado.", "correcta": true,
+              "fuente": { "bloque": "lu1.7" }, "cita": "Neutraliza los ácidos de la combustión y cubre el metal para que no se corroa cuando el motor está apagado." }
+          ]}
+        ]},
+        { "id": "11-M02", "titulo": "Bases y aditivos", "lecciones": [
+          { "id": "11-L02", "titulo": "La base: cinco grupos", "contenido": ["lu2.1..lu2.11"], "preguntas": [
+            { "id": "11-L02-P1", "tipo": "opcion", "enunciado": "¿De qué está hecho un lubricante?",
+              "opciones": ["De una base y un paquete de aditivos", "Solo de aceite mineral refinado", "De aceite y agua desmineralizada", "De base sintética y grasa"], "correcta": 0,
+              "fuente": { "bloque": "lu2.1" }, "cita": "Dos cosas, nada más: una base y un paquete de aditivos." },
+            { "id": "11-L02-P2", "tipo": "opcion", "enunciado": "¿Qué parte de un lubricante es aceite base?",
+              "opciones": ["Entre el 70 y el 90 %", "Entre el 10 y el 30 %", "La mitad exacta", "Menos del 10 %"], "correcta": 0,
+              "fuente": { "bloque": "lu2.2" }, "cita": "70–90 % Aceite base — el cuerpo del producto" },
+            { "id": "11-L02-P3", "tipo": "emparejar", "enunciado": "Empareja cada grupo de base con cómo se vende.",
+              "pares": [["Grupos I y II", "Mineral"], ["Grupo III", "Sintético comercial"], ["Grupo IV (PAO)", "Sintético real"], ["Grupo V (ésteres)", "Sintético especial"]],
+              "fuente": { "bloques": ["lu2.6", "lu2.7", "lu2.8", "lu2.9", "lu2.10"] } },
+            { "id": "11-L02-P4", "tipo": "vf", "enunciado": "Un «100 % sintético» de Grupo III y uno de Grupo IV son exactamente lo mismo.", "correcta": false,
+              "fuente": { "bloque": "lu2.11" }, "cita": "Un \"100 % sintético\" de Grupo III y uno de Grupo IV no son lo mismo." },
+            { "id": "11-L02-P5", "tipo": "opcion", "enunciado": "¿Qué es una base de Grupo III?",
+              "opciones": ["Mineral de origen con hidrotratamiento severo, que la industria vende como sintético", "Moléculas fabricadas en planta, todas iguales (PAO)", "Ésteres y siliconas de competición", "Refinado con solventes, el más básico y económico"], "correcta": 0,
+              "fuente": { "bloque": "lu2.8" }, "cita": "Es mineral de origen, pero la industria lo vende como sintético." }
+          ]},
+          { "id": "11-L03", "titulo": "Los aditivos y por qué se gastan", "contenido": ["lu2.12..lu2.22"], "preguntas": [
+            { "id": "11-L03-P1", "tipo": "emparejar", "enunciado": "Empareja cada aditivo con para qué sirve.",
+              "pares": [["Dispersantes", "Mantienen el hollín en suspensión y evitan los lodos"], ["Antidesgaste (ZDDP)", "Película donde la presión es tan alta que el aceite solo no alcanza"], ["Antiespumantes", "Revientan las burbujas"], ["Depresores del punto de fluidez", "Impiden que la cera cristalice en frío"]],
+              "fuente": { "bloques": ["lu2.14", "lu2.15", "lu2.20", "lu2.21"] } },
+            { "id": "11-L03-P2", "tipo": "opcion", "enunciado": "¿Qué aditivo hace posible un multigrado?",
+              "opciones": ["Los mejoradores del índice de viscosidad", "Los detergentes", "Los antiespumantes", "Los inhibidores de corrosión"], "correcta": 0,
+              "fuente": { "bloque": "lu2.17" }, "cita": "Son los que hacen posible un multigrado." },
+            { "id": "11-L03-P3", "tipo": "vf", "enunciado": "Los modificadores de fricción ahorran combustible, pero hacen patinar el embrague húmedo de una moto.", "correcta": true,
+              "fuente": { "bloque": "lu2.18" }, "cita": "Son los que hacen patinar un embrague húmedo de moto." },
+            { "id": "11-L03-P4", "tipo": "opcion", "enunciado": "¿Por qué el aceite tiene intervalo de cambio?",
+              "opciones": ["Porque se agota el paquete de aditivos y queda base sin propiedades", "Porque el aceite se evapora como la gasolina", "Porque el filtro se vuelve más fino", "Porque la base cambia de color"], "correcta": 0,
+              "fuente": { "bloque": "lu2.22" }, "cita": "lo que se agota es el paquete de aditivos" },
+            { "id": "11-L03-P5", "tipo": "vf", "enunciado": "Los detergentes mantienen limpias las piezas y además neutralizan los ácidos de la combustión.", "correcta": true,
+              "fuente": { "bloque": "lu2.13" }, "cita": "Mantienen limpias las piezas metálicas y neutralizan los ácidos de la combustión." }
+          ]}
+        ]},
+        { "id": "11-M03", "titulo": "El motor por dentro", "lecciones": [
+          { "id": "11-L04", "titulo": "El ciclo de cuatro tiempos", "contenido": ["lu5.1..lu5.8"], "preguntas": [
+            { "id": "11-L04-P1", "tipo": "opcion", "enunciado": "¿Cuál es el único tiempo del motor que produce fuerza?",
+              "opciones": ["Expansión", "Admisión", "Compresión", "Escape"], "correcta": 0,
+              "fuente": { "bloque": "lu5.6" }, "cita": "Es el único tiempo que produce fuerza." },
+            { "id": "11-L04-P2", "tipo": "emparejar", "enunciado": "Empareja cada tiempo con lo que pasa.",
+              "pares": [["Admisión", "Entra la mezcla de aire y combustible al cilindro"], ["Compresión", "El pistón sube y comprime con las válvulas cerradas"], ["Expansión", "Salta la chispa, la mezcla explota y empuja el pistón"], ["Escape", "El pistón sube y expulsa los gases quemados"]],
+              "fuente": { "bloques": ["lu5.4", "lu5.5", "lu5.6", "lu5.7"] } },
+            { "id": "11-L04-P3", "tipo": "opcion", "enunciado": "En un motor de cuatro tiempos, ¿cuántas vueltas da el cigüeñal en un ciclo completo?",
+              "opciones": ["Dos vueltas", "Una vuelta", "Cuatro vueltas", "Media vuelta"], "correcta": 0,
+              "fuente": { "bloque": "lu5.3" }, "cita": "Cuatro carreras del pistón, dos vueltas completas del cigüeñal." },
+            { "id": "11-L04-P4", "tipo": "vf", "enunciado": "Gracias a la película de aceite nada toca metal con metal, y en la explosión el aceite además se lleva el calor.", "correcta": true,
+              "fuente": { "bloque": "lu5.8" }, "cita": "Nada toca metal con metal gracias a la película de aceite. Y en la explosión el aceite además se lleva el calor." }
+          ]},
+          { "id": "11-L05", "titulo": "El cárter y el recorrido del aceite", "contenido": ["lu5.9..lu5.22", "gl.8"], "preguntas": [
+            { "id": "11-L05-P1", "tipo": "opcion", "enunciado": "¿Qué es el cárter?",
+              "opciones": ["El depósito metálico en la parte baja del motor donde se almacena el aceite", "La bomba que manda el aceite a presión", "El filtro que retiene la suciedad", "El conducto que lleva el aceite al turbo"], "correcta": 0,
+              "fuente": { "bloque": "lu5.10" }, "cita": "El cárter es el depósito metálico en la parte baja del motor." },
+            { "id": "11-L05-P2", "tipo": "emparejar", "enunciado": "Empareja cada vehículo con la capacidad típica de su cárter.",
+              "pares": [["Auto liviano", "3 a 5 litros"], ["Camioneta o SUV", "5 a 7 litros"], ["Moto", "0,8 a 1,5 litros"], ["Camión o bus", "15 a 40 litros"]],
+              "fuente": { "bloque": "lu5.11" }, "cita": "auto liviano 3 a 5 litros, camioneta o SUV 5 a 7, moto 0,8 a 1,5, camión o bus 15 a 40" },
+            { "id": "11-L05-P3", "tipo": "vf", "enunciado": "Llenar el cárter por encima de su nivel le da más protección al motor.", "correcta": false,
+              "fuente": { "bloque": "lu5.12" }, "cita": "Sobrellenar es tan dañino como dejarlo corto: el cigüeñal bate el aceite y la espuma no lubrica." },
+            { "id": "11-L05-P4", "tipo": "opcion", "enunciado": "¿Cuándo ocurre la mayor parte del desgaste del motor?",
+              "opciones": ["Al arrancar en frío, antes de que la bomba suba el aceite", "En carretera, a velocidad constante", "Con el motor apagado", "Al cambiar el aceite"], "correcta": 0,
+              "fuente": { "bloque": "lu5.22" }, "cita": "Al arrancar, la bomba tarda un instante en subirlo, y en ese instante hay piezas girando con poca película. Ahí ocurre la mayor parte del desgaste." },
+            { "id": "11-L05-P5", "tipo": "opcion", "enunciado": "En el recorrido del aceite, ¿qué hace la bomba?",
+              "opciones": ["Lo succiona y lo manda a presión al resto del circuito", "Retiene las partículas de desgaste", "Le baja la temperatura", "Lo deja caer por gravedad al cárter"], "correcta": 0,
+              "fuente": { "bloque": "lu5.15" }, "cita": "Lo succiona y lo manda a presión al resto del circuito." }
+          ]},
+          { "id": "11-L06", "titulo": "El motor de dos tiempos", "contenido": ["lu5.23..lu5.31", "mo4.4..mo4.5", {"qa": "premezcla proporcion dosificacion 1:50 1:32 autolube mezcla gasolina"}], "preguntas": [
+            { "id": "11-L06-P1", "tipo": "vf", "enunciado": "Que un motor de dos tiempos consuma aceite es normal: se quema con el combustible.", "correcta": true,
+              "fuente": { "bloque": "lu5.27" }, "cita": "Consume siempre. Se quema con el combustible: es normal." },
+            { "id": "11-L06-P2", "tipo": "opcion", "enunciado": "¿Dónde va el aceite en un motor de dos tiempos?",
+              "opciones": ["Mezclado con la gasolina, en premezcla o por bomba", "En el cárter, con su filtro", "En un depósito que nunca se repone", "En la caja de cambios"], "correcta": 0,
+              "fuente": { "bloque": "lu5.26" }, "cita": "Mezclado con la gasolina, en premezcla o por bomba." },
+            { "id": "11-L06-P3", "tipo": "opcion", "enunciado": "Un cliente quiere echar más aceite 2T del que pide el fabricante «para proteger más». ¿Qué le dices?",
+              "opciones": ["Que más aceite no es más protección: es más humo y más carbón", "Que está bien: mientras más aceite, mejor", "Que use aceite de carro", "Que la proporción no importa"], "correcta": 0,
+              "fuente": { "qa": "premezcla proporcion dosificacion 1:50 1:32 autolube mezcla gasolina" }, "cita": "más aceite no es más protección, es más humo y más carbón" },
+            { "id": "11-L06-P4", "tipo": "emparejar", "enunciado": "Empareja cada dato con su motor.",
+              "pares": [["Carreras del 4T", "Cuatro · dos vueltas de cigüeñal"], ["Carreras del 2T", "Dos · una vuelta"], ["Cárter y filtro del 4T", "Los dos"], ["Cárter y filtro del 2T", "Ninguno de los dos"]],
+              "fuente": { "bloques": ["lu5.25", "lu5.28"] } },
+            { "id": "11-L06-P5", "tipo": "opcion", "enunciado": "¿Cómo se gana la venta de aceite 2T?",
+              "opciones": ["Con disponibilidad: es un consumible y el cliente vuelve en días", "Con argumento técnico sobre el intervalo", "Con descuentos por tanque", "Vendiéndolo junto con el filtro de aceite"], "correcta": 0,
+              "fuente": { "bloque": "lu5.31" }, "cita": "El 2T se gana con disponibilidad; el 4T, con argumento técnico." }
+          ]}
+        ]}
+      ]
+    },
+    {
+      "id": "11-N2", "titulo": "Leer el envase",
+      "modulos": [
+        { "id": "11-M04", "titulo": "Viscosidad y SAE", "lecciones": [
+          { "id": "11-L07", "titulo": "Qué dice un 20W-50", "contenido": ["lu3.2", "lu4.1..lu4.6", "gl.4", "gl.6"], "preguntas": [
+            { "id": "11-L07-P1", "tipo": "opcion", "enunciado": "En un 20W-50, ¿qué quiere decir la W?",
+              "opciones": ["Winter, invierno: es el grado en frío", "Weight, el peso del aceite", "Los watts de potencia", "Los grados de temperatura"], "correcta": 0,
+              "fuente": { "bloque": "lu4.3" }, "cita": "La W es de Winter, invierno — no de peso." },
+            { "id": "11-L07-P2", "tipo": "vf", "enunciado": "El 20W de un 20W-50 quiere decir que el aceite trabaja a 20 grados de temperatura.", "correcta": false,
+              "fuente": { "bloque": "lu4.5" }, "cita": "No son 20 grados de temperatura." },
+            { "id": "11-L07-P3", "tipo": "opcion", "enunciado": "¿Quién manda la viscosidad que lleva un motor?",
+              "opciones": ["El fabricante del motor", "El clima de la ciudad", "La costumbre del taller", "El precio del galón"], "correcta": 0,
+              "fuente": { "bloque": "lu4.6" }, "cita": "La viscosidad la manda el fabricante del motor, no el clima, no el precio y no la costumbre del taller." },
+            { "id": "11-L07-P4", "tipo": "opcion", "enunciado": "¿Qué mide la SAE?",
+              "opciones": ["La viscosidad: qué tan fluido o espeso es el aceite", "La calidad y el desempeño del aceite", "El ahorro de combustible", "La fricción del embrague"], "correcta": 0,
+              "fuente": { "bloque": "lu3.2" }, "cita": "Mide la viscosidad: qué tan fluido o espeso es el aceite." },
+            { "id": "11-L07-P5", "tipo": "emparejar", "enunciado": "Empareja cada término con lo que significa.",
+              "pares": [["Multigrado", "Cumple dos grados SAE: uno en frío y otro caliente"], ["El 50 de un 20W-50", "Cómo se comporta a 100 °C, en temperatura de trabajo"], ["Índice de viscosidad", "Qué tanto cambia la viscosidad con la temperatura"]],
+              "fuente": { "bloques": ["gl.4", "lu4.4", "gl.6"] } }
+          ]},
+          { "id": "11-L08", "titulo": "El cuadro de viscosidades", "contenido": ["lu4.7..lu4.15", {"qa": "aceite mas espeso grueso protege mejor mito"}], "preguntas": [
+            { "id": "11-L08-P1", "tipo": "vf", "enunciado": "Un 80W-90 de transmisión es más espeso que un 20W-50 de motor porque su número es mayor.", "correcta": false,
+              "fuente": { "bloque": "lu4.15" }, "cita": "Un 80W-90 de transmisión no es más espeso que un 20W-50 de motor, aunque el número sea mayor: son escalas distintas (J306 contra J300)." },
+            { "id": "11-L08-P2", "tipo": "emparejar", "enunciado": "Empareja cada aplicación con su escala.",
+              "pares": [["Motor gasolina", "SAE J300"], ["Transmisión y corona", "SAE J306"], ["Hidráulico e industrial", "ISO VG"], ["Grasas", "NLGI"]],
+              "fuente": { "bloques": ["lu4.8", "lu4.11", "lu4.13", "lu4.14"] } },
+            { "id": "11-L08-P3", "tipo": "vf", "enunciado": "Un aceite más espeso que el que pide el motor lo protege más.", "correcta": false,
+              "fuente": { "qa": "aceite mas espeso grueso protege mejor mito" }, "cita": "Más espeso no es más protección." },
+            { "id": "11-L08-P4", "tipo": "opcion", "enunciado": "¿Cuál de estos grados es de motor diésel según el cuadro?",
+              "opciones": ["15W-40", "0W-16", "80W-90", "ISO 32"], "correcta": 0,
+              "fuente": { "bloque": "lu4.9" }, "cita": "5W-40 · 10W-40 · 15W-40" },
+            { "id": "11-L08-P5", "tipo": "opcion", "enunciado": "En un aceite hidráulico, ¿qué quiere decir AW?",
+              "opciones": ["Antidesgaste", "Para invierno", "Alta viscosidad", "Apto para agua"], "correcta": 0,
+              "fuente": { "bloque": "lu4.13" }, "cita": "AW = antidesgaste" }
+          ]}
+        ]},
+        { "id": "11-M05", "titulo": "Normas API, ILSAC y JASO", "lecciones": [
+          { "id": "11-L09", "titulo": "API, ILSAC y las otras siglas", "contenido": ["lu3.1", "lu3.3", "lu3.4", "lu3.6", "lu3.8", "lu3.10", {"qa": "diferencia api sae"}], "preguntas": [
+            { "id": "11-L09-P1", "tipo": "opcion", "enunciado": "¿Qué mide la API?",
+              "opciones": ["El desempeño: qué tan bien protege", "La viscosidad", "La consistencia de las grasas", "El punto de ebullición"], "correcta": 0,
+              "fuente": { "bloque": "lu3.3" }, "cita": "Mide el desempeño: qué tan bien protege." },
+            { "id": "11-L09-P2", "tipo": "emparejar", "enunciado": "Empareja cada sigla con lo que mide.",
+              "pares": [["SAE", "La viscosidad"], ["API", "El desempeño: qué tan bien protege"], ["ILSAC", "El ahorro de combustible además de la protección"], ["ISO VG", "La viscosidad de aceites industriales e hidráulicos"]],
+              "fuente": { "bloques": ["lu3.2", "lu3.3", "lu3.4", "lu3.8"] } },
+            { "id": "11-L09-P3", "tipo": "opcion", "enunciado": "En la norma API, ¿qué indican las letras S y C?",
+              "opciones": ["S para gasolina y C para diésel", "S para sintético y C para convencional", "S para moto y C para carro", "S para verano y C para invierno"], "correcta": 0,
+              "fuente": { "bloque": "lu3.3" }, "cita": "S para gasolina, C para diésel" },
+            { "id": "11-L09-P4", "tipo": "vf", "enunciado": "La norma API se elige igual o superior a la que pide el manual del vehículo.", "correcta": true,
+              "fuente": { "bloque": "lu3.10" }, "cita": "la norma se elige igual o superior a la del manual" },
+            { "id": "11-L09-P5", "tipo": "opcion", "enunciado": "¿Cuál es el sello «starburst» del envase?",
+              "opciones": ["ILSAC", "API", "JASO", "ACEA"], "correcta": 0,
+              "fuente": { "bloque": "lu3.4" }, "cita": "Es el sello \"starburst\"." }
+          ]},
+          { "id": "11-L10", "titulo": "La escalera de las normas", "contenido": ["lu3.11..lu3.17", {"qa": "api sp sq sn plus categoria gasolina vigente lspi"}], "preguntas": [
+            { "id": "11-L10-P1", "tipo": "opcion", "enunciado": "En gasolina, ¿cuál es la categoría API más nueva?",
+              "opciones": ["SQ", "SN", "SL", "SF"], "correcta": 0,
+              "fuente": { "bloque": "lu3.12" }, "cita": "SQ desde marzo 2025" },
+            { "id": "11-L10-P2", "tipo": "vf", "enunciado": "CK-4 y FA-4 son intercambiables en cualquier diésel.", "correcta": false,
+              "fuente": { "bloque": "lu3.16" }, "cita": "CK-4 y FA-4 no son intercambiables." },
+            { "id": "11-L10-P3", "tipo": "opcion", "enunciado": "¿Contra qué protegen API SP y SQ en los turbo pequeños?",
+              "opciones": ["Contra el LSPI, la detonación anticipada que rompe pistones", "Contra el agua en el combustible", "Contra el patinaje del embrague", "Contra la congelación"], "correcta": 0,
+              "fuente": { "qa": "api sp sq sn plus categoria gasolina vigente lspi" }, "cita": "Ambas protegen contra LSPI, la detonación anticipada que rompe pistones en los turbo pequeños." },
+            { "id": "11-L10-P4", "tipo": "vf", "enunciado": "Un aceite API SQ puede cambiar la viscosidad que exige el motor.", "correcta": false,
+              "fuente": { "bloque": "lu3.17" }, "cita": "no reemplaza una aprobación de fabricante ni cambia la viscosidad que exige el motor" },
+            { "id": "11-L10-P5", "tipo": "opcion", "enunciado": "¿Qué categoría diésel reemplaza a CJ-4 y CI-4 en cualquier diésel?",
+              "opciones": ["CK-4", "FA-4", "CF", "SN Plus"], "correcta": 0,
+              "fuente": { "bloque": "lu3.16" }, "cita": "CK-4 reemplaza a CJ-4 y CI-4 en cualquier diésel." }
+          ]},
+          { "id": "11-L11", "titulo": "JASO: la norma de la moto", "contenido": ["mo5.1..mo5.9"], "preguntas": [
+            { "id": "11-L11-P1", "tipo": "opcion", "enunciado": "¿Qué mide la JASO en el aceite de moto de cuatro tiempos?",
+              "opciones": ["El coeficiente de fricción: cuánto agarra el embrague", "La protección del motor", "El ahorro de combustible", "La viscosidad en frío"], "correcta": 0,
+              "fuente": { "bloque": "mo5.3" }, "cita": "sino el coeficiente de fricción: cuánto agarra el embrague" },
+            { "id": "11-L11-P2", "tipo": "emparejar", "enunciado": "Empareja cada grado JASO con su uso.",
+              "pares": [["MA", "Moto estándar de cambios"], ["MA1", "Motos antiguas o de conducción suave"], ["MA2", "Conducción exigente o deportiva"], ["MB", "Scooter automático con CVT"]],
+              "fuente": { "bloques": ["mo5.5", "mo5.6", "mo5.7", "mo5.8"] } },
+            { "id": "11-L11-P3", "tipo": "vf", "enunciado": "Un aceite JASO MB en una moto de cambios hace patinar el embrague.", "correcta": true,
+              "fuente": { "bloque": "mo5.9" }, "cita": "Un MB en embrague húmedo se paga con el embrague patinando." },
+            { "id": "11-L11-P4", "tipo": "opcion", "enunciado": "Si hay duda con una moto de cambios, ¿qué grado JASO es la opción segura?",
+              "opciones": ["MA2", "MB", "FD", "MA1"], "correcta": 0,
+              "fuente": { "bloque": "mo5.9" }, "cita": "Si hay duda, MA2 es la opción segura para casi cualquier moto de cambios." },
+            { "id": "11-L11-P5", "tipo": "opcion", "enunciado": "¿Por qué en moto manda la JASO y no solo la API?",
+              "opciones": ["Porque motor, caja y embrague comparten el mismo aceite", "Porque las motos no tienen cárter", "Porque la API no se usa en Japón", "Porque las motos usan aceite de transmisión"], "correcta": 0,
+              "fuente": { "bloque": "mo5.2" }, "cita": "que motor, caja y embrague comparten el mismo aceite" }
+          ]},
+          { "id": "11-L12", "titulo": "Dos tiempos: JASO, API TC e ISO", "contenido": ["mo5.10..mo5.18"], "preguntas": [
+            { "id": "11-L12-P1", "tipo": "opcion", "enunciado": "En dos tiempos, ¿cuál es el nivel JASO más alto?",
+              "opciones": ["FD", "FB", "FC", "MA2"], "correcta": 0,
+              "fuente": { "bloque": "mo5.12" }, "cita": "FD es la más alta" },
+            { "id": "11-L12-P2", "tipo": "vf", "enunciado": "TC es una categoría de la JASO.", "correcta": false,
+              "fuente": { "bloque": "mo5.17" }, "cita": "TC es una categoría API, no JASO." },
+            { "id": "11-L12-P3", "tipo": "emparejar", "enunciado": "Empareja cada norma JASO con su equivalente ISO.",
+              "pares": [["JASO FB", "ISO-L-EGB"], ["JASO FC", "ISO-L-EGC"], ["JASO FD", "ISO-L-EGD"]],
+              "fuente": { "bloque": "mo5.15" }, "cita": "JASO FB = ISO-L-EGB · JASO FC = ISO-L-EGC · JASO FD = ISO-L-EGD" },
+            { "id": "11-L12-P4", "tipo": "opcion", "enunciado": "Un envase dice ISO-L-EGD y otro JASO FD. ¿Qué le dices al cliente?",
+              "opciones": ["Que están al mismo nivel: son las mismas pruebas", "Que el ISO es mejor", "Que el JASO es mejor", "Que no se pueden comparar"], "correcta": 0,
+              "fuente": { "bloque": "mo5.16" }, "cita": "Si un envase dice ISO-L-EGD y otro JASO FD, están al mismo nivel." },
+            { "id": "11-L12-P5", "tipo": "opcion", "enunciado": "En un envase de moto, ¿qué te dicen la API y la JASO?",
+              "opciones": ["La API qué tan bien protege y la JASO si sirve para ese embrague", "Las dos miden la viscosidad", "La API sirve para moto y la JASO para carro", "La JASO dice el precio de referencia"], "correcta": 0,
+              "fuente": { "bloque": "mo5.18" }, "cita": "la API dice qué tan bien protege y la JASO si sirve para ese embrague" }
+          ]}
+        ]}
+      ]
+    },
+    {
+      "id": "11-N3", "titulo": "Elegir y cuidar el aceite",
+      "modulos": [
+        { "id": "11-M06", "titulo": "Tipos e intervalos", "lecciones": [
+          { "id": "11-L13", "titulo": "Mineral, semisintético y sintético", "contenido": ["lu4.16..lu4.20", "lu2.11", {"qa": "argumento subir sintetico convencer kilometro protegido escalon"}], "preguntas": [
+            { "id": "11-L13-P1", "tipo": "emparejar", "enunciado": "Empareja cada tipo de aceite con lo que es.",
+              "pares": [["Mineral", "Base derivada directamente del crudo refinado"], ["Semisintético", "Mezcla de base mineral con base sintética"], ["Sintético", "Base fabricada, de moléculas uniformes"]],
+              "fuente": { "bloques": ["lu4.17", "lu4.18", "lu4.19"] } },
+            { "id": "11-L13-P2", "tipo": "opcion", "enunciado": "¿Cómo se vende el salto a sintético?",
+              "opciones": ["Se vende kilómetro protegido, no litro", "Por el color del aceite", "Con descuento en el galón", "Diciendo que no hay que cambiarlo nunca"], "correcta": 0,
+              "fuente": { "bloque": "lu4.20" }, "cita": "No se vende litro, se vende kilómetro protegido." },
+            { "id": "11-L13-P3", "tipo": "vf", "enunciado": "Un sintético de 10.000 km cuesta menos por kilómetro que un mineral de 4.000.", "correcta": true,
+              "fuente": { "bloque": "lu4.20" }, "cita": "Un sintético de 10.000 km cuesta menos por kilómetro que un mineral de 4.000." },
+            { "id": "11-L13-P4", "tipo": "opcion", "enunciado": "¿Cuál es el escalón de subida más fácil de vender?",
+              "opciones": ["El semisintético", "El monogrado 40", "El aceite de competición", "El aceite de transmisión"], "correcta": 0,
+              "fuente": { "bloque": "lu4.18" }, "cita": "El escalón de subida más fácil de vender." },
+            { "id": "11-L13-P5", "tipo": "opcion", "enunciado": "Si el cliente no cede con el sintético, ¿qué haces?",
+              "opciones": ["Lo bajas de escalón dentro de la misma marca: no pierdes la venta", "Le dices que vuelva otro día", "Le ofreces aceite de transmisión", "Le vendes el más barato aunque no cumpla el manual"], "correcta": 0,
+              "fuente": { "qa": "argumento subir sintetico convencer kilometro protegido escalon" }, "cita": "Y si el cliente no cede, bájalo de escalón dentro de la misma marca: no pierdas la venta." }
+          ]},
+          { "id": "11-L14", "titulo": "Cada cuánto se cambia", "contenido": [{"qa": "cada cuanto cambia aceite intervalo kilometraje km"}, "lu2.22", {"qa": "aceite taxi uso severo ciudad"}, {"qa": "long life larga vida intervalo extendido"}, "lu6.10"], "preguntas": [
+            { "id": "11-L14-P1", "tipo": "emparejar", "enunciado": "Empareja cada base con su intervalo de referencia.",
+              "pares": [["Mineral", "3.000 a 5.000 km"], ["Semisintético", "5.000 a 7.500 km"], ["Sintético", "7.500 a 10.000 km o más"]],
+              "fuente": { "qa": "cada cuanto cambia aceite intervalo kilometraje km" }, "cita": "Mineral: 3.000 a 5.000 km. Semisintético: 5.000 a 7.500. Sintético: 7.500 a 10.000 o más." },
+            { "id": "11-L14-P2", "tipo": "opcion", "enunciado": "¿Quién manda el intervalo de cambio?",
+              "opciones": ["El manual del vehículo", "El color del aceite", "Lo que diga el cliente", "La marca del filtro"], "correcta": 0,
+              "fuente": { "qa": "cada cuanto cambia aceite intervalo kilometraje km" }, "cita": "el que manda es el manual del vehículo" },
+            { "id": "11-L14-P3", "tipo": "vf", "enunciado": "En uso severo, como un taxi, el intervalo se acorta respecto al del manual.", "correcta": true,
+              "fuente": { "qa": "aceite taxi uso severo ciudad" }, "cita": "Ahí el intervalo se acorta respecto al del manual" },
+            { "id": "11-L14-P4", "tipo": "vf", "enunciado": "En un motor turbo se puede estirar el intervalo si el aceite es bueno.", "correcta": false,
+              "fuente": { "qa": "cada cuanto cambia aceite intervalo kilometraje km" }, "cita": "En turbo el intervalo no se estira nunca." },
+            { "id": "11-L14-P5", "tipo": "opcion", "enunciado": "El cliente dice que su aceite «todavía tiene nivel». ¿Qué le respondes?",
+              "opciones": ["El aceite no se acaba, se gasta por dentro: si pasó el intervalo, ya no protege", "Que tiene razón: si hay nivel, no hace falta cambiarlo", "Que complete con cualquier aceite", "Que cambie solo el filtro"], "correcta": 0,
+              "fuente": { "bloque": "lu6.10" }, "cita": "El aceite no se acaba, se gasta por dentro. Aunque el nivel esté bien, si pasó el intervalo ya no protege." }
+          ]},
+          { "id": "11-L15", "titulo": "Qué pasa si no se cambia", "contenido": ["lu6.1..lu6.9"], "preguntas": [
+            { "id": "11-L15-P1", "tipo": "opcion", "enunciado": "Si no se cambia el aceite, ¿qué es lo primero que pasa?",
+              "opciones": ["Se agotan los aditivos", "Se funde el motor", "Se tapa el radiador", "Se rompe la bomba de agua"], "correcta": 0,
+              "fuente": { "bloque": "lu6.2" }, "cita": "Se agotan los aditivos." },
+            { "id": "11-L15-P2", "tipo": "vf", "enunciado": "Cuando el filtro se satura, se abre la válvula de derivación y circula aceite sucio sin filtrar.", "correcta": true,
+              "fuente": { "bloque": "lu6.5" }, "cita": "Cuando el filtro se satura, se abre la válvula de derivación y circula aceite sucio sin filtrar." },
+            { "id": "11-L15-P3", "tipo": "opcion", "enunciado": "¿Qué es el lodo?",
+              "opciones": ["La suciedad que ya nadie mantiene en suspensión y se deposita: una masa negra y pegajosa", "El aceite nuevo recién puesto", "El agua del refrigerante", "El polvo del filtro de aire"], "correcta": 0,
+              "fuente": { "bloque": "lu6.4" }, "cita": "esa masa negra y pegajosa es el lodo" },
+            { "id": "11-L15-P4", "tipo": "opcion", "enunciado": "Cuando el cliente ya nota los síntomas (más consumo, menos potencia, ruido), ¿qué quiere decir?",
+              "opciones": ["Que el daño ya empezó", "Que todavía no pasa nada", "Que basta con agregar un aditivo", "Que el aceite está nuevo"], "correcta": 0,
+              "fuente": { "bloque": "lu6.9" }, "cita": "Cuando el cliente nota estos síntomas, el daño ya empezó." }
+          ]}
+        ]},
+        { "id": "11-M07", "titulo": "Motores que piden más", "lecciones": [
+          { "id": "11-L16", "titulo": "Motores turbo", "contenido": ["lu7.1..lu7.6", "gl.14"], "preguntas": [
+            { "id": "11-L16-P1", "tipo": "opcion", "enunciado": "¿Qué aceite lleva un motor turbo?",
+              "opciones": ["Sintético, en el grado exacto del manual y con la API vigente (SP o SQ)", "Mineral 20W-50, para que sea más espeso", "Cualquiera: el turbo no usa el aceite del motor", "Aceite de transmisión"], "correcta": 0,
+              "fuente": { "bloque": "lu7.2" }, "cita": "Sintético, en el grado exacto que pide el manual y con la norma API vigente (SP o SQ)." },
+            { "id": "11-L16-P2", "tipo": "opcion", "enunciado": "¿Qué es la coquización?",
+              "opciones": ["La carbonización del aceite por calor extremo, que tapa los conductos del turbo", "La mezcla de aceite con gasolina", "El cambio de color del aceite nuevo", "La espuma por llenar de más el cárter"], "correcta": 0,
+              "fuente": { "bloque": "gl.14" }, "cita": "Carbonización del aceite por calor extremo. Es lo que tapa los conductos de un turbo." },
+            { "id": "11-L16-P3", "tipo": "vf", "enunciado": "Después de manejo exigente conviene dejar el motor un momento en ralentí antes de apagarlo.", "correcta": true,
+              "fuente": { "bloque": "lu7.5" }, "cita": "después de manejo exigente, un momento en ralentí antes de apagar" },
+            { "id": "11-L16-P4", "tipo": "opcion", "enunciado": "¿A cuántas revoluciones gira un turbocompresor?",
+              "opciones": ["A más de 200.000 rpm", "A unas 6.000 rpm", "A 13.000 rpm", "A 1.000 rpm"], "correcta": 0,
+              "fuente": { "bloque": "lu7.4" }, "cita": "Un turbocompresor gira a más de 200.000 revoluciones por minuto" },
+            { "id": "11-L16-P5", "tipo": "vf", "enunciado": "Vender una API vieja para un turbo moderno es una forma de ahorrarle al cliente.", "correcta": false,
+              "fuente": { "bloque": "lu7.6" }, "cita": "Vender una API vieja en un turbo moderno no es ahorrar." }
+          ]},
+          { "id": "11-L17", "titulo": "Aceite de moto vs. de carro", "contenido": ["mo0.1..mo0.2", "mo6.1..mo6.13"], "preguntas": [
+            { "id": "11-L17-P1", "tipo": "opcion", "enunciado": "En una moto de cambios, ¿qué lubrica el aceite?",
+              "opciones": ["Motor, caja y embrague", "Solo el motor", "Solo la cadena", "El motor y el radiador"], "correcta": 0,
+              "fuente": { "bloque": "mo6.6" }, "cita": "Motor + caja + embrague" },
+            { "id": "11-L17-P2", "tipo": "vf", "enunciado": "El aceite de carro, en una moto de embrague húmedo, hace patinar el embrague por sus modificadores de fricción.", "correcta": true,
+              "fuente": { "bloque": "mo6.11" }, "cita": "En una moto de embrague húmedo eso hace que el embrague patine." },
+            { "id": "11-L17-P3", "tipo": "opcion", "enunciado": "¿Con qué frase cierras «póngame el del carro, es más barato»?",
+              "opciones": ["«Es medio litro de diferencia en precio contra un embrague»", "«Bueno, el del carro también sirve»", "«Le pongo menos aceite y queda igual»", "«Lléveselo y, si patina, vuelve»"], "correcta": 0,
+              "fuente": { "bloque": "mo6.13" }, "cita": "Es medio litro de diferencia en precio contra un embrague." },
+            { "id": "11-L17-P4", "tipo": "opcion", "enunciado": "Para una moto de cambios en Ecuador, ¿qué aceite va casi siempre?",
+              "opciones": ["JASO MA2 en 20W-50, la viscosidad del manual", "JASO MB en 0W-20", "Aceite de carro 5W-30", "API TC de dos tiempos"], "correcta": 0,
+              "fuente": { "bloque": "mo0.1" }, "cita": "Moto de cambios (4T): JASO MA2 en la viscosidad del manual — en Ecuador casi siempre 20W-50." },
+            { "id": "11-L17-P5", "tipo": "vf", "enunciado": "La moto exige más con menos: menos aceite, más revoluciones, más calor y tres trabajos en vez de uno.", "correcta": true,
+              "fuente": { "bloque": "mo6.9" }, "cita": "Menos aceite, más revoluciones, más calor y tres trabajos en vez de uno." }
+          ]}
+        ]}
+      ]
+    },
+    {
+      "id": "11-N4", "titulo": "Vender",
+      "modulos": [
+        { "id": "11-M08", "titulo": "Las marcas", "lecciones": [
+          { "id": "11-L18", "titulo": "Cinco marcas, el 80 % del presupuesto", "contenido": ["mk1.1..mk1.14"], "preguntas": [
+            { "id": "11-L18-P1", "tipo": "opcion", "enunciado": "¿Cuáles son las cinco marcas que hacen el 80 % del presupuesto?",
+              "opciones": ["Starke, AROIL, Biofactor, Castrol y Motul", "Mobil, Castrol, Motul, Top 1 y Havoline", "Starke, Mobil, Chevron, Kendall y Amalie", "AROIL, Top 1, Golden Bear, Ursa y Texaco"], "correcta": 0,
+              "fuente": { "qa": "cinco marcas 80 presupuesto principales" }, "cita": "Cinco marcas hacen el 80 % del presupuesto: STARKE (marca propia y línea principal), AROIL, BIOFACTOR, CASTROL y MOTUL." },
+            { "id": "11-L18-P2", "tipo": "vf", "enunciado": "AROIL y Biofactor son dos proveedores distintos.", "correcta": false,
+              "fuente": { "bloque": "mk1.13" }, "cita": "Aroil y Biofactor no son dos proveedores, son uno" },
+            { "id": "11-L18-P3", "tipo": "emparejar", "enunciado": "Empareja cada marca con lo que es.",
+              "pares": [["Starke", "La marca propia: la de mayor margen"], ["AROIL", "Marca de lubricantes de Biofactor S.A., fabricante ecuatoriano"], ["Castrol", "Marca global de BP"], ["Motul", "Francesa, especialista y referencia en moto"]],
+              "fuente": { "bloques": ["mk1.3", "mk1.6", "mk1.10", "mk1.12"] } },
+            { "id": "11-L18-P4", "tipo": "opcion", "enunciado": "¿En qué líneas aparece Starke, la marca propia?",
+              "opciones": ["En grasas y refrigerantes", "En aceites de motor", "En baterías", "En filtros"], "correcta": 0,
+              "fuente": { "bloque": "mk1.3" }, "cita": "Aparece en grasas y refrigerantes." },
+            { "id": "11-L18-P5", "tipo": "opcion", "enunciado": "¿Por qué Starke es la marca que hay que empujar?",
+              "opciones": ["Porque en ella te quedas con todo el margen", "Porque es la más barata del mercado", "Porque es la única importada", "Porque tiene gama completa de moto"], "correcta": 0,
+              "fuente": { "bloque": "mk1.4" }, "cita": "en esta te quedas con todo el margen" }
+          ]},
+          { "id": "11-L19", "titulo": "Las 16 marcas de lubricantes", "contenido": ["mk2.1..mk2.5", {"qa": "lineas codigos 10 11 12 13 cuantas lineas portafolio"}], "preguntas": [
+            { "id": "11-L19-P1", "tipo": "opcion", "enunciado": "De las cinco marcas del 80 %, ¿cuáles están en la línea 11 de lubricantes?",
+              "opciones": ["AROIL, Biofactor, Castrol y Motul", "Starke, AROIL, Castrol y Motul", "Solo Starke y Motul", "Solo Castrol"], "correcta": 0,
+              "fuente": { "qa": "marcas lubricantes cuales 16 linea 11 listado" }, "cita": "Dieciséis marcas en la línea 11: AROIL, Biofactor, Castrol, Motul" },
+            { "id": "11-L19-P2", "tipo": "vf", "enunciado": "Chevron, Havoline, Texaco y Ursa son todas de Chevron Corporation.", "correcta": true,
+              "fuente": { "bloque": "mk2.5" }, "cita": "Chevron, Havoline, Texaco y Ursa son de Chevron Corporation." },
+            { "id": "11-L19-P3", "tipo": "opcion", "enunciado": "¿Cuáles son las tres líneas principales, en orden?",
+              "opciones": ["Lubricantes, filtros y aditivos", "Filtros, lubricantes y baterías", "Aditivos, grasas y lubricantes", "Bujías, filtros y lubricantes"], "correcta": 0,
+              "fuente": { "bloque": "mk2.2" }, "cita": "Lubricantes, filtros y aditivos son las tres principales, en ese orden." },
+            { "id": "11-L19-P4", "tipo": "emparejar", "enunciado": "Empareja cada línea con su código interno.",
+              "pares": [["Lubricantes", "11"], ["Filtros", "10"], ["Aditivos", "15"], ["Líquido de freno", "20"]],
+              "fuente": { "qa": "lineas codigos 10 11 12 13 cuantas lineas portafolio" }, "cita": "11 Lubricantes, 10 Filtros, 15 Aditivos, 20 Líquido de freno" },
+            { "id": "11-L19-P5", "tipo": "vf", "enunciado": "Los códigos de línea son los que salen en la factura y en la orden de despacho.", "correcta": true,
+              "fuente": { "bloque": "mk2.1" }, "cita": "Los códigos son los que aparecen en factura y orden de despacho." }
+          ]},
+          { "id": "11-L20", "titulo": "Marcas de moto y la escalera Motul", "contenido": ["mo1.1..mo1.18", "mo2.1", "mo2.15..mo2.20", "mo3.1", "mo3.7"], "preguntas": [
+            { "id": "11-L20-P1", "tipo": "opcion", "enunciado": "¿Cuál es la única marca de moto que se maneja en varias viscosidades y niveles de calidad?",
+              "opciones": ["Motul", "Top 1", "Havoline", "Golden Bear"], "correcta": 0,
+              "fuente": { "bloque": "mo2.1" }, "cita": "Motul es la única que se maneja en varias viscosidades y varios niveles de calidad." },
+            { "id": "11-L20-P2", "tipo": "emparejar", "enunciado": "Empareja cada Motul con su tipo.",
+              "pares": [["3000", "Mineral"], ["5000", "Semisintético, gama media"], ["5100", "Semisintético, gama media alta"], ["7100", "100 % sintético, gama alta"]],
+              "fuente": { "bloques": ["mo2.15", "mo2.16", "mo2.17", "mo2.18"] } },
+            { "id": "11-L20-P3", "tipo": "opcion", "enunciado": "¿Qué pregunta ordena la venta de aceite de moto?",
+              "opciones": ["«¿Qué moto tiene y para qué la usa?»", "«¿Cuánto quiere gastar?»", "«¿De qué color es su moto?»", "«¿Qué marca usa su vecino?»"], "correcta": 0,
+              "fuente": { "bloque": "mo2.20" }, "cita": "¿Qué moto tiene y para qué la usa?" },
+            { "id": "11-L20-P4", "tipo": "vf", "enunciado": "Motul y Castrol mandan en las dos listas: en unidades y en presupuesto.", "correcta": true,
+              "fuente": { "bloque": "mo1.16" }, "cita": "Motul y Castrol mandan en las dos listas." },
+            { "id": "11-L20-P5", "tipo": "opcion", "enunciado": "¿Por qué la escalera de Motul es oro para vender?",
+              "opciones": ["Porque subes al cliente de escalón sin cambiarlo de marca", "Porque es la marca más barata", "Porque viene solo en 20W-50", "Porque no necesita norma JASO"], "correcta": 0,
+              "fuente": { "bloque": "mo2.19" }, "cita": "subes al cliente de 3000 a 5000, o de 5100 a 7100, sin cambiarlo de marca" }
+          ]}
+        ]},
+        { "id": "11-M09", "titulo": "El mercado", "lecciones": [
+          { "id": "11-L21", "titulo": "Qué rota en el mercado", "contenido": ["me1.2..me1.3", "me1.7", "me2.1..me2.7", "me2.17"], "preguntas": [
+            { "id": "11-L21-P1", "tipo": "opcion", "enunciado": "¿Cuál es la marca líder de lubricantes en Ecuador según las cifras públicas del manual?",
+              "opciones": ["Mobil", "Castrol", "Motul", "Top 1"], "correcta": 0,
+              "fuente": { "qa": "mobil lider mercado cuota participacion ecuador" }, "cita": "Mobil es la marca líder de lubricantes en Ecuador: cerró 2022 con 9,22 % de cuota" },
+            { "id": "11-L21-P2", "tipo": "vf", "enunciado": "En un mercado tan fragmentado no gana la marca: gana la distribución, quien tiene el producto el día que el cliente lo necesita.", "correcta": true,
+              "fuente": { "bloque": "me1.7" }, "cita": "un mercado así no lo gana la marca, lo gana la distribución" },
+            { "id": "11-L21-P3", "tipo": "emparejar", "enunciado": "Empareja cada producto con su perfil.",
+              "pares": [["Gasolina 20W-50", "Volumen alto, margen bajo"], ["Diésel 15W-40", "Ticket alto, cliente flota"], ["Aceite de moto", "Recompra corta, crecimiento"], ["Filtro de aceite", "Acompañante natural"]],
+              "fuente": { "bloques": ["me2.2", "me2.3", "me2.4", "me2.5"] } },
+            { "id": "11-L21-P4", "tipo": "opcion", "enunciado": "¿Qué viscosidades pide el parque nuevo?",
+              "opciones": ["0W-20 y 5W-30 sintéticos", "20W-50 mineral", "25W-60", "80W-90"], "correcta": 0,
+              "fuente": { "bloque": "me2.17" }, "cita": "Ese parque pide 0W-20 y 5W-30 sintéticos." },
+            { "id": "11-L21-P5", "tipo": "vf", "enunciado": "El filtro de aceite mueve más unidades que ninguna otra referencia porque va atado a cada cambio.", "correcta": true,
+              "fuente": { "bloque": "me2.5" }, "cita": "Atado a cada cambio. Mueve más unidades que ninguna otra referencia." }
+          ]}
+        ]},
+        { "id": "11-M10", "titulo": "Cómo se vende", "lecciones": [
+          { "id": "11-L22", "titulo": "Cómo se arma la conversación", "contenido": ["ve1.1", "ve1.2", "ve1.5", "ve1.8", {"qa": "como vender argumentario canasta lineas por factura"}, "lu1.9"], "preguntas": [
+            { "id": "11-L22-P1", "tipo": "opcion", "enunciado": "En lubricantes, ¿qué preguntas antes de opinar?",
+              "opciones": ["¿Qué vehículo, cuántos kilómetros tiene y qué dice el manual?", "¿Cuánto quiere gastar?", "¿Qué marca le gusta?", "¿De qué tamaño quiere el envase?"], "correcta": 0,
+              "fuente": { "bloque": "ve1.1" }, "cita": "Pregunta: ¿qué vehículo, cuántos kilómetros tiene y qué dice el manual?" },
+            { "id": "11-L22-P2", "tipo": "opcion", "enunciado": "Cuando vendes lubricante, ¿qué vendes en realidad?",
+              "opciones": ["El intervalo, no el envase", "El envase más grande", "El color del aceite", "La marca más cara"], "correcta": 0,
+              "fuente": { "bloque": "ve1.1" }, "cita": "Vendes: el intervalo, no el envase." },
+            { "id": "11-L22-P3", "tipo": "vf", "enunciado": "Si el cliente compara precio de galón, le cambias la métrica a costo por kilómetro.", "correcta": true,
+              "fuente": { "bloque": "ve1.1" }, "cita": "Si el cliente compara precio de galón, cámbiale la métrica a costo por kilómetro." },
+            { "id": "11-L22-P4", "tipo": "opcion", "enunciado": "¿Qué indicador conviene medir?",
+              "opciones": ["Líneas por factura, no solo monto", "Solo el monto vendido", "Cuántas visitas haces", "Cuántos galones regalas"], "correcta": 0,
+              "fuente": { "bloque": "ve1.8" }, "cita": "El indicador que conviene medir es líneas por factura, no solo monto." },
+            { "id": "11-L22-P5", "tipo": "emparejar", "enunciado": "Empareja cada venta con la pregunta que la abre.",
+              "pares": [["Lubricantes", "¿Qué vehículo, cuántos kilómetros tiene y qué dice el manual?"], ["Filtros", "¿Cuándo cambió el de cabina?"], ["Aceite de moto", "¿Es 2T o 4T, y tiene embrague o es automática?"]],
+              "fuente": { "bloques": ["ve1.1", "ve1.2", "ve1.5"] } }
+          ]},
+          { "id": "11-L23", "titulo": "Presentaciones: de galón a balde", "contenido": ["lu4.21..lu4.25", "lu5.11"], "preguntas": [
+            { "id": "11-L23-P1", "tipo": "emparejar", "enunciado": "Empareja cada presentación con a quién va.",
+              "pares": [["Litro y galón", "Consumidor final, moto, taller pequeño"], ["Balde", "Lubricadora y taller establecido"], ["Tanque", "Flota, industria, maquinaria"]],
+              "fuente": { "bloques": ["lu4.22", "lu4.23", "lu4.24"] } },
+            { "id": "11-L23-P2", "tipo": "opcion", "enunciado": "¿Qué pregunta abre la venta de subir de galón a balde?",
+              "opciones": ["«¿Cuánto aceite mueve usted al mes?»", "«¿Qué color le gusta?»", "«¿Tiene carro nuevo?»", "«¿Cuántos empleados tiene?»"], "correcta": 0,
+              "fuente": { "bloque": "lu4.25" }, "cita": "¿cuánto aceite mueve usted al mes?" },
+            { "id": "11-L23-P3", "tipo": "vf", "enunciado": "Subir a un cliente de galón a balde es más barato que conseguir un cliente nuevo.", "correcta": true,
+              "fuente": { "bloque": "lu4.25" }, "cita": "Subir a un cliente de galón a balde, o de balde a tanque, es más barato que conseguir uno nuevo." },
+            { "id": "11-L23-P4", "tipo": "opcion", "enunciado": "¿Por qué el diésel se vende en balde y el liviano en galón?",
+              "opciones": ["Por la capacidad del cárter: un camión o bus lleva de 15 a 40 litros", "Porque el diésel es más barato", "Porque no hay galones para diésel", "Porque el balde dura más tiempo abierto"], "correcta": 0,
+              "fuente": { "bloque": "lu5.11" }, "cita": "camión o bus 15 a 40. Por eso el diésel se vende en balde y el liviano en galón." }
+          ]}
+        ]}
+      ]
+    }
+  ],
+  "objeciones": [
+    { "id": "11-O1", "titulo": "Está caro", "cliente": "Está caro.",
+      "situacion": "Le ofreces el sintético en el grado que pide el manual de su vehículo y el cliente te dice:",
+      "manual": ["ve1.1", "lu4.20", {"qa": "argumento subir sintetico convencer kilometro protegido escalon"}, "lu1.9"],
+      "pasos": [
+        { "id": "11-O1-P1", "paso": "Pregunta antes de opinar", "enunciado": "¿Qué haces primero?",
+          "opciones": ["Pregunto qué vehículo es, cuántos kilómetros tiene y qué dice el manual", "Le bajo el precio de una vez para no perder la venta", "Le digo que lo caro siempre es mejor", "Le ofrezco el más barato sin preguntar nada"], "correcta": 0,
+          "explicaciones": ["Así arranca el manual: primero preguntas, después vendes.", "Bajar precio antes de saber qué pide el motor es regalar margen.", "El manual no vende «caro es mejor»: vende kilómetro protegido.", "Sin preguntar no sabes si ese aceite sirve para ese motor."],
+          "fuente": { "bloque": "ve1.1" }, "cita": "Pregunta: ¿qué vehículo, cuántos kilómetros tiene y qué dice el manual?" },
+        { "id": "11-O1-P2", "paso": "Argumenta con el manual", "enunciado": "Su motor pide sintético. ¿Con qué argumento respondes?",
+          "opciones": ["No se vende litro, se vende kilómetro protegido: un sintético de 10.000 km cuesta menos por kilómetro que un mineral de 4.000", "Que el sintético dura para siempre y no hay que cambiarlo", "Que el precio lo pone la marca y no se puede hacer nada", "Que el mineral daña cualquier motor"], "correcta": 0,
+          "explicaciones": ["Ese es el argumento del manual: compara kilómetros, no galones.", "Falso: el sintético también tiene intervalo.", "No es argumento: el cliente se queda con su objeción.", "El manual no dice eso: el mineral es precio de entrada, con intervalos cortos."],
+          "fuente": { "bloque": "lu4.20" }, "cita": "No se vende litro, se vende kilómetro protegido. Un sintético de 10.000 km cuesta menos por kilómetro que un mineral de 4.000." },
+        { "id": "11-O1-P3", "paso": "Cierra con una propuesta", "enunciado": "El cliente sigue dudando. ¿Cómo cierras?",
+          "opciones": ["Si aún quiere precio, lo bajo de escalón dentro de la misma marca: no pierdo la venta", "Le digo que vuelva cuando tenga plata", "Le repito el precio y espero", "Le pongo el más barato aunque no cumpla el manual"], "correcta": 0,
+          "explicaciones": ["Es lo que dice el manual: no pierdas la venta, bájala de escalón.", "Así pierdes la venta y el cliente se va a otro mostrador.", "Sin propuesta no hay cierre.", "Nunca por debajo de lo que pide el manual del vehículo."],
+          "fuente": { "qa": "argumento subir sintetico convencer kilometro protegido escalon" }, "cita": "Y si el cliente no cede, bájalo de escalón dentro de la misma marca: no pierdas la venta." }
+      ]},
+    { "id": "11-O2", "titulo": "El otro es más barato", "cliente": "El otro es más barato.",
+      "situacion": "El cliente compara tu galón con el de otro local y te dice:",
+      "manual": ["ve1.1", {"qa": "objecion mas barato competencia precio caro cliente dice otro economico"}, "lu2.1"],
+      "pasos": [
+        { "id": "11-O2-P1", "paso": "Pregunta antes de opinar", "enunciado": "¿Qué haces primero?",
+          "opciones": ["Pregunto qué vehículo es, cuántos kilómetros tiene y qué dice el manual, para comparar lo comparable", "Le digo que el otro es de mala calidad", "Le igualo el precio sin preguntar", "Le digo que entonces compre allá"], "correcta": 0,
+          "explicaciones": ["Primero preguntas: así sabes qué necesita su motor y qué está comparando.", "Hablar mal del otro no responde la objeción.", "Igualar precio sin saber qué compara es regalar margen.", "Pierdes la venta sin pelearla."],
+          "fuente": { "bloque": "ve1.1" }, "cita": "Pregunta: ¿qué vehículo, cuántos kilómetros tiene y qué dice el manual?" },
+        { "id": "11-O2-P2", "paso": "Argumenta con el manual", "enunciado": "¿Qué argumento usas?",
+          "opciones": ["Que no compare galones sino kilómetros: le cambias la métrica a costo por kilómetro", "Que todos los aceites son iguales", "Que el más caro siempre tiene más aditivos", "Que el otro local no da factura"], "correcta": 0,
+          "explicaciones": ["Así lo dice el manual: si compara precio de galón, cámbiale la métrica.", "Si todos fueran iguales, ganaría siempre el más barato.", "El manual no dice eso: la diferencia está en la base y los aditivos, y se mide en kilómetros.", "No es un argumento técnico."],
+          "fuente": { "bloque": "ve1.1" }, "cita": "Si el cliente compara precio de galón, cámbiale la métrica a costo por kilómetro." },
+        { "id": "11-O2-P3", "paso": "Cierra con una propuesta", "enunciado": "Aun así el cliente quiere precio. ¿Cómo cierras?",
+          "opciones": ["Le ofrezco la marca de volumen del portafolio: no pierdo la venta, la bajo de escalón", "Lo dejo ir", "Le hago todo el descuento que pida", "Le vendo uno que no cumple la norma del manual"], "correcta": 0,
+          "explicaciones": ["Es el cierre del manual: no pierdas la venta, bájala de escalón.", "Dejarlo ir es perder la venta.", "Regalar margen no es cerrar bien.", "Nunca por debajo de lo que pide el manual del vehículo."],
+          "fuente": { "qa": "objecion mas barato competencia precio caro cliente dice otro economico" }, "cita": "Si aún así el cliente quiere precio, ahí está la marca de volumen del portafolio — no pierdas la venta, bájala de escalón." }
+      ]},
+    { "id": "11-O3", "titulo": "Yo siempre pongo 20W-50", "cliente": "Yo siempre pongo 20W-50.",
+      "situacion": "El cliente tiene un auto moderno. Le comentas que hay que ver lo que pide su manual y te dice:",
+      "manual": ["ve1.1", {"qa": "objecion siempre pongo 20w50 costumbre taller"}, "lu4.6", "lu5.22", "me2.17"],
+      "pasos": [
+        { "id": "11-O3-P1", "paso": "Pregunta antes de opinar", "enunciado": "¿Qué haces primero?",
+          "opciones": ["Pregunto qué vehículo es, cuántos kilómetros tiene y qué dice el manual", "Le vendo el 20W-50 sin preguntar", "Le digo que el 20W-50 ya no sirve para nada", "Le pregunto qué marca usa su mecánico"], "correcta": 0,
+          "explicaciones": ["Sin saber qué pide el manual no puedes opinar sobre la viscosidad.", "Puede ser la viscosidad equivocada para ese motor.", "Falso: el 20W-50 es correcto para buena parte del parque viejo.", "La viscosidad no la decide la marca ni el mecánico: la manda el fabricante del motor."],
+          "fuente": { "bloque": "ve1.1" }, "cita": "Pregunta: ¿qué vehículo, cuántos kilómetros tiene y qué dice el manual?" },
+        { "id": "11-O3-P2", "paso": "Argumenta con el manual", "enunciado": "Su manual pide 5W-30. ¿Qué le explicas?",
+          "opciones": ["Que en un motor que pide 5W-30 el 20W-50 no alcanza a llegar a tiempo a las galerías en el arranque: no es más protección, es protección más tarde", "Que más espeso siempre protege más", "Que la viscosidad depende del clima de la ciudad", "Que el 20W son 20 grados de temperatura"], "correcta": 0,
+          "explicaciones": ["Es la respuesta del manual a esta objeción.", "Falso: más espeso no es más protección.", "Falso: la viscosidad la manda el fabricante del motor, no el clima.", "Falso: el 20W es una posición en la escala SAE, no grados."],
+          "fuente": { "qa": "objecion siempre pongo 20w50 costumbre taller" }, "cita": "en un motor moderno que pide 5W-30 el 20W-50 no alcanza a llegar a tiempo a las galerías en el arranque. No es darle más protección, es dársela más tarde." },
+        { "id": "11-O3-P3", "paso": "Cierra con una propuesta", "enunciado": "¿Cómo cierras?",
+          "opciones": ["Le propongo el aceite en la viscosidad que pide su manual: lo que manda es el manual, no la costumbre", "Le vendo el 20W-50 para no discutir", "Le recomiendo mezclar mitad y mitad", "Le digo que pregunte en otro lado"], "correcta": 0,
+          "explicaciones": ["Así cierra el manual: manda el manual del vehículo.", "Le vendes un aceite que llega tarde en el arranque.", "Mezclar no es una solución de rutina.", "Pierdes la venta y la confianza del cliente."],
+          "fuente": { "qa": "objecion siempre pongo 20w50 costumbre taller" }, "cita": "Lo que manda es el manual, no la costumbre." }
+      ]},
+    { "id": "11-O4", "titulo": "No conozco esa marca", "cliente": "No conozco esa marca.",
+      "situacion": "Le ofreces AROIL, una de las cinco marcas del 80 %, y el cliente te dice:",
+      "manual": ["ve1.1", "lu3.10", {"qa": "leer envase etiqueta interpretar galon"}, "mk1.6", "mk1.8"],
+      "pasos": [
+        { "id": "11-O4-P1", "paso": "Pregunta antes de opinar", "enunciado": "¿Qué haces primero?",
+          "opciones": ["Pregunto qué vehículo es, cuántos kilómetros tiene y qué dice el manual", "Le cambio de marca sin preguntar nada", "Le digo que todas las marcas son iguales", "Le pregunto cuál es su marca favorita y se la vendo"], "correcta": 0,
+          "explicaciones": ["Con lo que pide su manual sabes qué tiene que decir el envase.", "Cambiar de marca sin saber qué necesita el motor no resuelve nada.", "No es cierto: cada envase dice su viscosidad y su norma.", "La marca favorita no dice si calza con el motor."],
+          "fuente": { "bloque": "ve1.1" }, "cita": "Pregunta: ¿qué vehículo, cuántos kilómetros tiene y qué dice el manual?" },
+        { "id": "11-O4-P2", "paso": "Argumenta con el manual", "enunciado": "¿Qué le muestras?",
+          "opciones": ["El envase: la viscosidad SAE que pide su manual y la norma API igual o superior; con eso sabe que calza", "Que la marca no importa nunca", "Que si es barata es mala", "Que todas las marcas son del mismo dueño"], "correcta": 0,
+          "explicaciones": ["Es la regla del manual que resuelve casi cualquier consulta.", "Lo que importa es que cumpla viscosidad y norma.", "El precio no dice si calza con el motor.", "Falso: solo Chevron, Havoline, Texaco y Ursa son del mismo dueño."],
+          "fuente": { "bloque": "lu3.10" }, "cita": "En un envase hay siempre dos datos: la viscosidad SAE y la norma API. La viscosidad la manda el fabricante del motor; la norma se elige igual o superior a la del manual." },
+        { "id": "11-O4-P3", "paso": "Cierra con una propuesta", "enunciado": "¿Cómo cierras?",
+          "opciones": ["Le cuento quién la hace (AROIL es de Biofactor S.A., fabricante ecuatoriano) y le propongo llevarla en la viscosidad y norma de su manual", "Le cambio a la marca que conoce aunque no cumpla la norma", "Le digo que busque la marca en internet y vuelva", "Le regalo una muestra y no le vendo nada"], "correcta": 0,
+          "explicaciones": ["Presentas la marca con lo que dice el manual y cierras con una propuesta concreta.", "Nunca por debajo de la norma que pide el manual.", "Lo mandas a otro lado y pierdes la venta.", "Sin propuesta no hay cierre."],
+          "fuente": { "bloque": "mk1.6" }, "cita": "Marca de lubricantes de Biofactor S.A., fabricante ecuatoriano." }
+      ]},
+    { "id": "11-O5", "titulo": "Intervalo estirado", "cliente": "Todavía tiene nivel, lo cambio más adelante.",
+      "situacion": "El cliente ya pasó el kilometraje de cambio y te dice:",
+      "manual": ["ve1.1", "lu6.10", "lu2.22", {"qa": "cada cuanto cambia aceite intervalo kilometraje km"}, "lu6.9", "ve1.2"],
+      "pasos": [
+        { "id": "11-O5-P1", "paso": "Pregunta antes de opinar", "enunciado": "¿Qué haces primero?",
+          "opciones": ["Pregunto qué vehículo es, cuántos kilómetros tiene y qué dice el manual", "Le digo que está bien y que vuelva después", "Le vendo un aditivo para estirar el cambio", "Le digo que mire el color del aceite"], "correcta": 0,
+          "explicaciones": ["Con el kilometraje y el manual sabes cuánto se pasó del intervalo.", "Así el motor sigue con un aceite que ya no protege.", "El manual no dice que un aditivo estire el intervalo.", "El color no dice si el aceite todavía protege."],
+          "fuente": { "bloque": "ve1.1" }, "cita": "Pregunta: ¿qué vehículo, cuántos kilómetros tiene y qué dice el manual?" },
+        { "id": "11-O5-P2", "paso": "Argumenta con el manual", "enunciado": "¿Qué le explicas?",
+          "opciones": ["El aceite no se acaba, se gasta por dentro: aunque el nivel esté bien, si pasó el intervalo ya no protege", "Que tiene razón: si hay nivel, todo bien", "Que el aceite solo se gasta cuando baja el nivel", "Que con un buen aceite el intervalo se estira lo que uno quiera"], "correcta": 0,
+          "explicaciones": ["Es la frase del manual para esta situación, y es literalmente cierta.", "Lo que se agota es el paquete de aditivos, no el nivel.", "Falso: se gasta por dentro aunque el nivel esté bien.", "Manda el manual del vehículo, y en turbo el intervalo no se estira nunca."],
+          "fuente": { "bloque": "lu6.10" }, "cita": "El aceite no se acaba, se gasta por dentro. Aunque el nivel esté bien, si pasó el intervalo ya no protege." },
+        { "id": "11-O5-P3", "paso": "Cierra con una propuesta", "enunciado": "¿Cómo cierras?",
+          "opciones": ["Le propongo hacer el cambio ahora con filtro nuevo: nunca sale un lubricante solo de tu pedido", "Le digo que vuelva cuando se encienda el testigo", "Le vendo medio galón para completar el nivel", "Le recomiendo esperar a que el motor suene"], "correcta": 0,
+          "explicaciones": ["Propuesta concreta, y con el filtro proteges el aceite que acaba de comprar.", "Cuando el cliente nota los síntomas, el daño ya empezó.", "Completar nivel no devuelve los aditivos que se agotaron.", "Esperar síntomas es esperar el daño."],
+          "fuente": { "bloque": "ve1.2" }, "cita": "Nunca sale un lubricante solo de tu pedido." }
+      ]},
+    { "id": "11-O6", "titulo": "Póngame el del carro (moto)", "cliente": "Póngame el del carro, es más barato.",
+      "situacion": "Un cliente con moto de cambios pide aceite y te dice:",
+      "manual": ["ve1.5", "mo6.9", "mo6.11", "mo6.12", "mo6.13", "mo0.1"],
+      "pasos": [
+        { "id": "11-O6-P1", "paso": "Pregunta antes de opinar", "enunciado": "¿Qué preguntas primero?",
+          "opciones": ["¿Es 2T o 4T, y tiene embrague o es automática?", "¿Cuánto quiere gastar?", "Nada: le vendo el del carro", "¿De qué color es la moto?"], "correcta": 0,
+          "explicaciones": ["Es la pregunta del manual para el aceite de moto: cambia el producto por completo.", "El presupuesto no dice qué norma necesita el embrague.", "Así el error se paga con un embrague.", "No tiene nada que ver con el aceite."],
+          "fuente": { "bloque": "ve1.5" }, "cita": "Pregunta: ¿es 2T o 4T, y tiene embrague o es automática?" },
+        { "id": "11-O6-P2", "paso": "Argumenta con el manual", "enunciado": "Es 4T de cambios. ¿Qué le explicas?",
+          "opciones": ["El aceite de carro lleva modificadores de fricción: en una moto de embrague húmedo hace que el embrague patine. Por eso existe la JASO", "Que el aceite de carro es demasiado espeso", "Que da lo mismo, pero el de moto huele mejor", "Que la moto no tiene cárter"], "correcta": 0,
+          "explicaciones": ["Es el argumento del manual.", "El problema no es la viscosidad: son los modificadores de fricción.", "No da lo mismo: el embrague patina.", "Falso: la moto 4T sí tiene cárter."],
+          "fuente": { "bloque": "mo6.11" }, "cita": "El aceite de auto lleva modificadores de fricción para ahorrar combustible. En una moto de embrague húmedo eso hace que el embrague patine." },
+        { "id": "11-O6-P3", "paso": "Cierra con una propuesta", "enunciado": "¿Cómo cierras?",
+          "opciones": ["«Es medio litro de diferencia en precio contra un embrague», y le ofreces el JASO MA2 en la viscosidad de su manual", "Le vendes el del carro para no perder la venta", "Le dices que mezcle mitad y mitad", "Le recomiendas no cambiar el aceite todavía"], "correcta": 0,
+          "explicaciones": ["Es la frase del manual, con propuesta concreta.", "Ganas una venta y pierdes un cliente cuando patine el embrague.", "Sigue llevando modificadores de fricción.", "No responde la objeción."],
+          "fuente": { "bloque": "mo6.13" }, "cita": "Es medio litro de diferencia en precio contra un embrague." }
+      ]}
+  ]
+}
