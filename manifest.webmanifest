@@ -1,7 +1,7 @@
 {
-  "name": "Academia Austrofil — Lubricantes",
+  "name": "Academia Austrofil",
   "short_name": "Academia",
-  "description": "Tutor para que los asesores de Austrofil aprendan la línea de lubricantes con el Manual de Campo y se certifiquen.",
+  "description": "Tutor para que los asesores de Austrofil aprendan la canasta de productos con el Manual de Campo, practiquen casos de mostrador y se certifiquen. Funciona sin internet.",
   "lang": "es",
   "start_url": "./",
   "scope": "./",
@@ -14,5 +14,9 @@
     { "src": "icons/gota-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "icons/gota-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
     { "src": "icons/gota-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Practicar", "short_name": "Practicar", "description": "Repaso del día y quiz rápido", "url": "./#/practicar", "icons": [{ "src": "icons/gota-192.png", "sizes": "192x192" }] },
+    { "name": "Mostrador", "short_name": "Mostrador", "description": "Casos de mostrador y objeciones", "url": "./#/mostrador", "icons": [{ "src": "icons/gota-192.png", "sizes": "192x192" }] }
   ]
 }

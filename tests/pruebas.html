@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pruebas · Academia Austrofil</title>
+<style>
+  :root{color-scheme:light dark;--ok:#2F6B45;--mal:#9A3B26;--tx:#191C19;--fondo:#F1F3EF;--caja:#FCFCFA;--linea:#D8DCD2}
+  @media (prefers-color-scheme: dark){:root{--ok:#84CC9A;--mal:#E59680;--tx:#E9ECE6;--fondo:#121513;--caja:#1A1E1A;--linea:#2D332C}}
+  body{margin:0;padding:16px;font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--fondo);color:var(--tx)}
+  h1{font-size:20px;margin:0 0 4px}
+  p{margin:0 0 12px}
+  ol{padding-left:22px;display:flex;flex-direction:column;gap:6px}
+  li.ok{color:var(--ok)} li.mal{color:var(--mal)}
+  li small{display:block;color:var(--tx);opacity:.8;white-space:pre-wrap}
+  #resumen{font-weight:700;font-size:17px}
+  iframe{width:390px;height:760px;border:1px solid var(--linea);border-radius:12px;background:var(--caja);max-width:100%}
+</style>
+</head>
+<body>
+<h1>Pruebas de la Academia</h1>
+<p>Corren en este navegador, sin internet ni instalaciones. Guardan y devuelven tu avance de este navegador al terminar.
+  Ábrelas desde el servidor local: <code>powershell -File tools\servidor.ps1</code> y luego <code>http://localhost:8765/tests/pruebas.html</code>.</p>
+<p id="resumen" role="status">Corriendo…</p>
+<ol id="lista"></ol>
+<div id="marco"></div>
+<script type="module" src="pruebas.js"></script>
+</body>
+</html>
