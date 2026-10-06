@@ -214,7 +214,9 @@ function instruccionCalificar(tipo){
     c.map(function(x){ return "\"" + x[0] + "\": true o false"; }).join(", ") +
     "}, \"bien\": \"qué estuvo bien, 1 o 2 frases\", \"falto\": \"qué faltó, 1 o 2 frases\", \"manual\": \"cómo lo dice el manual, con sus palabras\"}.";
 }
+var tareaLibre = "";   /* instrucción completa para el cliente simulado y el coach (pestaña Hablar) */
 function iaInstr(){
+  if (iaModo === "libre") return tareaLibre;
   var base = IA_BASE + "\n" + (iaModo === "calificar" ? tareaCalificar : IA_TAREA[iaModo] || "");
   if (iaModo === "generar") return base;
   return base + "\n\nAPOYO (del mismo manual):\n" + (DATA.contextoIA || []).join("\n");
@@ -264,10 +266,12 @@ function saveKey(){
 
 /* una consulta con respaldo de modelos: si uno no tiene cupo, prueba el siguiente (igual que el chat del manual) */
 var ctl = null;
-async function pedirGem(modo, texto, out, caja){
+function pedirGem(modo, texto, out, caja){
+  return consultar(modo, [{ role: "user", parts: [{ text: texto }] }], out, caja);
+}
+async function consultar(modo, contents, out, caja){
   iaModo = modo;
   chatlog = caja || out;
-  var contents = [{ role: "user", parts: [{ text: texto }] }];
   var st = { text: "" }, res = null, last = null;
   if (ctl) try { ctl.abort(); } catch (_){}
   ctl = new AbortController();
@@ -411,3 +415,27 @@ export async function generarPreguntas(x, textoLeccion){
 }
 export function textoErrorIA(e, extra){ return mensajeError(e, extra); }
 export function nombreSeguro(t){ return quitarNombre(t); }
+
+/* ============ CONVERSACIÓN CON UN CLIENTE (pestaña Hablar) ============ */
+/* turnos: [{ quien: "asesor" | "cliente", texto }]. El cliente lo hace la IA (rol «model») y el asesor es el usuario.
+   La API pide que la conversación empiece por el usuario: va primero una acotación de la escena.
+   El texto del asesor pasa por quitarNombre: la IA nunca recibe su nombre. */
+export async function responderCliente(sistema, escena, turnos, out, caja){
+  tareaLibre = sistema;
+  var contents = [{ role: "user", parts: [{ text: escena }] }];
+  turnos.forEach(function(t){
+    contents.push({ role: t.quien === "cliente" ? "model" : "user",
+                    parts: [{ text: t.quien === "asesor" ? quitarNombre(t.texto) : t.texto }] });
+  });
+  var r = await consultar("libre", contents, out, caja);
+  return plainAI(r.text).trim();
+}
+/* una consulta al coach (pista o evaluación) con su propia instrucción */
+export async function preguntarCoach(sistema, pedido){
+  tareaLibre = sistema;
+  var oculto = document.createElement("div");
+  var r = await consultar("libre", [{ role: "user", parts: [{ text: quitarNombre(pedido) }] }], oculto, oculto);
+  return r.text;
+}
+export function jsonDeIA(t){ return sacarJSON(t); }
+export function textoPlanoIA(t){ return plainAI(t); }

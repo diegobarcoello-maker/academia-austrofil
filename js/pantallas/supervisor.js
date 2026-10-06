@@ -98,6 +98,8 @@ function tarjetaAsesor(a, eq){
         h("p", { class: "small muted" }, "Casos " + x.ca + "/" + x.ct + " · objeciones " + x.oa + "/" + x.ot),
         x.fl && x.fl.length ? h("p", { class: "small" }, h("b", null, "Reforzar: "), x.fl.join(" · ")) : null);
     }),
+    a.cv && a.cv.n ? h("p", { class: "small" }, h("b", null, "Conversaciones con cliente (IA): "),
+      a.cv.n + " · promedio " + a.cv.p + "/10 · mejor " + a.cv.b + "/10") : null,
     h("p", { class: "tiny" }, "Racha: " + (a.r || 0) + " · días de estudio en 30 días: " + (a.ds || 0) +
       (a.ue ? " · último estudio: " + haceCuanto(a.ue) : "") + " · app v" + a.app));
 }
@@ -109,6 +111,7 @@ function textoEquipo(lista){
       out.push("  Línea " + x.c + " " + x.n + ": " + x.la + "/" + x.lt + " lecciones · niveles " + x.na + "/" + x.nt + " · examen " + examenTx(x) +
         (x.fl && x.fl.length ? " · reforzar: " + x.fl.join("; ") : ""));
     });
+    if (a.cv && a.cv.n) out.push("  Conversaciones con cliente (IA): " + a.cv.n + " · promedio " + a.cv.p + "/10");
   });
   return out.join("\n");
 }

@@ -5,7 +5,7 @@
    El 1 o el 0 del prefijo dicen si el contenido va comprimido. Formato: PREFIJO.<datos>.<suma de control> */
 import { empaquetar, desempaquetar, suma, hoy, limpio, pct, fechaEc } from "./util.js";
 import { lineasActivas } from "./datos.js";
-import { ST, normalizar, avanceLinea, temasFlojos, rachaActual, diasEstudiados, ultimoEstudio } from "./estado.js";
+import { ST, normalizar, avanceLinea, temasFlojos, rachaActual, diasEstudiados, ultimoEstudio, resumenCharlas } from "./estado.js";
 
 /* ============ RESPALDO ============ */
 export async function crearRespaldo(){
@@ -47,8 +47,10 @@ function resumenLineas(){
   });
 }
 export async function crearCodigoAvance(){
+  var cv = resumenCharlas();
   var o = { a: "avance", v: 1, id: ST.perfil.id, n: ST.perfil.nombre, f: hoy(), app: window.VERSION.n,
-            r: rachaActual(), m: ST.d.racha.mejor || 0, ds: diasEstudiados(30), ue: ultimoEstudio(), l: resumenLineas() };
+            r: rachaActual(), m: ST.d.racha.mejor || 0, ds: diasEstudiados(30), ue: ultimoEstudio(), l: resumenLineas(),
+            cv: { n: cv.n, p: cv.prom, b: cv.mejor } };
   var p = await empaquetar(o);
   return (p.comprimido ? "AV1" : "AV0") + "." + p.cuerpo + "." + p.suma;
 }
@@ -63,6 +65,8 @@ export function textoAvance(){
     out.push("Temas para reforzar: " + (x.fl.length ? x.fl.join("; ") : "ninguno"));
   });
   out.push("");
+  var cv = resumenCharlas();
+  if (cv.n) out.push("Conversaciones con cliente (IA): " + cv.n + " · promedio " + cv.prom + "/10 · mejor " + cv.mejor + "/10");
   out.push("Racha: " + rachaActual() + " · días de estudio en 30 días: " + diasEstudiados(30));
   return out.join("\n");
 }

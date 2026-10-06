@@ -5,7 +5,7 @@ import { cargarDatos } from "./datos.js";
 import { ST, cargarEstado, hayPerfil, pedirPersistencia } from "./estado.js";
 import { app, aplicarTema } from "./ui.js";
 import { iniciarNav, render, alPintar, ir, pantallaActual } from "./nav.js";
-import { iniciarPWA, alCambiarInstalacion } from "./pwa.js";
+import { iniciarPWA, alCambiarInstalacion, iniciarBotonInstalar } from "./pwa.js";
 import "./quiz.js";
 import "./pantallas/bienvenida.js";
 import "./pantallas/ruta.js";
@@ -14,6 +14,7 @@ import "./pantallas/mostrador.js";
 import "./pantallas/yo.js";
 import "./pantallas/supervisor.js";
 import "./pantallas/revisar.js";
+import "./pantallas/hablar.js";
 
 function pintarCabecera(){
   var chip = $("#perfil-chip");
@@ -45,6 +46,7 @@ async function arrancar(){
   $("#perfil-chip").addEventListener("click", function(){ ir("yo"); });
   render();
   iniciarPWA();
+  iniciarBotonInstalar();
   /* si Chrome ofrece instalar la app, aparece el botón (sin mover al asesor si ya bajó por la pantalla) */
   alCambiarInstalacion(function(){
     var p = pantallaActual();

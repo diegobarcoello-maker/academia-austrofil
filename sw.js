@@ -14,10 +14,10 @@ var ARCHIVOS = [
   "js/app.js", "js/util.js", "js/datos.js", "js/estado.js", "js/ui.js", "js/nav.js", "js/ia.js", "js/quiz.js",
   "js/codigos.js", "js/certificado.js", "js/validar.js", "js/pwa.js",
   "js/pantallas/bienvenida.js", "js/pantallas/ruta.js", "js/pantallas/practicar.js", "js/pantallas/mostrador.js",
-  "js/pantallas/yo.js", "js/pantallas/supervisor.js", "js/pantallas/revisar.js",
+  "js/pantallas/yo.js", "js/pantallas/supervisor.js", "js/pantallas/revisar.js", "js/pantallas/hablar.js", "js/voz.js",
   "fonts/archivo-latin.woff2", "fonts/plex-sans-latin.woff2", "fonts/plex-mono-600-latin.woff2",
   "icons/gota-192.png", "icons/gota-512.png",
-  "datos/manual.json"
+  "datos/manual.json", "datos/clientes.json"
 ];
 var RE_VERSION = /var VERSION = \{ n: (\d+),/;
 

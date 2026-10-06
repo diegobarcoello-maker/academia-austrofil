@@ -8,7 +8,7 @@ import { app, barra, toast, confirmar, hoja, encabezado, barraProgreso, filaMenu
 import { registrar, ir, render } from "../nav.js";
 import { panelIA } from "../ia.js";
 import { crearRespaldo, leerRespaldo, crearCodigoAvance, textoAvance } from "../codigos.js";
-import { puedeInstalar, instalar, instalada } from "../pwa.js";
+import { instalada, abrirInstalar } from "../pwa.js";
 
 var MANUAL_URL = "https://diegobarcoello-maker.github.io/manual-austrofil/";
 function wa(t){ return "https://wa.me/?text=" + encodeURIComponent(t); }
@@ -22,9 +22,6 @@ function pantallaYo(){
       h("div", null, h("div", { class: "kicker" }, "Mi avance"), h("h1", null, nombre()),
         h("p", { class: "small muted" }, "Racha: " + r + (r === 1 ? " día" : " días") + " · " + ds + (ds === 1 ? " día" : " días") + " de estudio en los últimos 30")))
   ]);
-  if (puedeInstalar()) app.appendChild(h("div", { class: "aviso" }, icon("celular"),
-    h("p", null, h("b", null, "Instálala en " + EQUIPO.tu + ". "), "Se abre como app y funciona sin internet."),
-    h("button", { class: "btn small", onclick: instalar }, "Instalar")));
   lineasActivas().forEach(function(l){ app.appendChild(tarjetaLinea(l)); });
 
   app.appendChild(h("h2", { class: "hlabel" }, "Compartir y respaldar"));
@@ -44,6 +41,7 @@ function pantallaYo(){
   var otros = ST.perfiles.lista.length - 1;
   add(app, h("div", { class: "menu" },
     filaMenu("personas", otros > 0 ? "Cambiar de asesor" : "Agregar otro asesor", otros > 0 ? (otros + 1) + " asesores en " + EQUIPO.este : "Si comparten " + EQUIPO.este, function(){ ir("perfiles/todos"); }),
+    instalada() ? null : filaMenu("descargar", "Descargar la app", "Con su ícono en " + EQUIPO.tu + " y sin internet", abrirInstalar, { id: "yo-instalar" }),
     filaMenu("ajustes", "Ajustes e IA", "Nombre, tema claro u oscuro, IA gratis", function(){ ir("ajustes"); }),
     filaMenu("equipo", "Panel del supervisor", "Junta los avances que te mandan los asesores", function(){ ir("supervisor"); }),
     filaMenu("libro", "Abrir el Manual de Campo", "Necesita internet", MANUAL_URL, { target: "_blank", rel: "noopener" })));

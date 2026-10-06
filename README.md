@@ -11,6 +11,13 @@ Sitio: https://diegobarcoello-maker.github.io/academia-austrofil/
   prueba de nivel para quien ya sabe (80 %) y examen final de 20 preguntas con certificado (80 %).
 - **Practicar**: repaso espaciado (lo fallado vuelve mañana; lo acertado a los 2, 4, 8 y 16 días), quiz rápido y racha.
 - **Mostrador**: casos técnicos (qué preguntar, qué recomendar, qué más vender) y objeciones, en tres pasos.
+- **Hablar**: conversación con un cliente simulado por la IA (lubricadora, lubricentro, ferretería, lavadora de autos,
+  taller, repuestos de motos, flota, gasolinera), en tres dificultades. Se le escribe o se le habla con el micrófono, y el
+  cliente puede contestar en voz alta. Cada cliente tiene una necesidad que solo cuenta si le preguntan bien. Un coach da
+  pistas y al final califica con el método del manual (apertura, preguntas, argumento, objeciones, canasta y cierre).
+  Los clientes están en `datos/clientes.json`: para sumar uno, se copia uno y se cambian sus datos.
+- **Descargar app**: botón siempre a la vista. Si el navegador lo permite, instala con un toque; si no, muestra los pasos
+  para Android, iPhone o computadora.
 - **Avance de cada asesor**: varios asesores pueden compartir un celular (cada uno con su nombre y su avance).
   Cada asesor manda su avance por WhatsApp y el supervisor lo pega en el **Panel del supervisor** (Yo › Panel del supervisor),
   que arma la tabla del equipo. No hay servidor: todo queda en el celular de cada uno.
@@ -34,7 +41,9 @@ js/quiz.js                 sesiones de preguntas (lección, examen, prueba de ni
 js/codigos.js              códigos de respaldo (AA1.…) y de avance para el supervisor (AV1.…)
 js/ia.js                   IA opcional con Gemini (bloque copiado del manual)
 js/pwa.js, sw.js           sin internet, aviso «Actualizar» e instalación
-js/pantallas/*.js          ruta, practicar, mostrador, yo, supervisor, bienvenida, revisar
+js/pantallas/*.js          ruta, practicar, mostrador, hablar, yo, supervisor, bienvenida, revisar
+js/voz.js                  dictado con el micrófono y lectura en voz alta (pestaña Hablar)
+datos/clientes.json        clientes y dificultades para conversar con la IA
 datos/lineas.json          orden y códigos de las líneas; sin "archivo" una línea sale como «Pronto»
 datos/linea-11-lubricantes.json   niveles → módulos → lecciones → preguntas, casos y objeciones
 datos/manual.json          extracción del Manual de Campo (tools/extraer_manual.py)

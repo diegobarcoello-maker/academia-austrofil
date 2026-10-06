@@ -30,7 +30,11 @@ async function esperar(fn, ms, que){
 }
 
 /* ---------- el avance de este navegador se guarda y se devuelve al final ---------- */
-function claves(){ var o = []; for (var i = 0; i < localStorage.length; i++){ var k = localStorage.key(i); if (k.indexOf("academia.") === 0) o.push(k); } return o; }
+function claves(){
+  var o = [];
+  for (var i = 0; i < localStorage.length; i++){ var k = localStorage.key(i); if (k.indexOf("academia.") === 0 || k.indexOf("austrofil.gemini") === 0) o.push(k); }
+  return o;
+}
 var copia = {};
 claves().forEach(function(k){ copia[k] = localStorage.getItem(k); });
 var copiaSesion = sessionStorage.getItem("academia.elegido");
@@ -292,6 +296,71 @@ prueba("Varios asesores en un celular: pregunta «¿Quién estudia?» al abrir",
   await abrir("#/ruta");
   ok(/Quién estudia/.test(doc().querySelector("main h1").textContent), "no preguntó quién estudia");
   igual(doc().querySelectorAll(".perfil-fila").length, 2, "asesores en la lista");
+});
+
+prueba("Descargar app: el botón está a la vista y explica cómo instalar", async function(){
+  /* viene de la prueba anterior con «¿Quién estudia?» en pantalla: entra el primer asesor */
+  var fila = doc().querySelector(".perfil-fila");
+  if (fila){ fila.click(); await esperar(function(){ return doc().querySelector(".hero"); }, 3000, "la ruta"); }
+  else await ir("#/ruta", ".hero");
+  ok(!doc().body.classList.contains("sesion"), "la ruta no debería ocultar la cabecera");
+  var b = doc().querySelector("#btn-instalar");
+  ok(b && !b.hidden, "no se ve el botón «Descargar app»");
+  b.click();
+  await esperar(function(){ return doc().querySelector(".sheet"); }, 2000, "la hoja con los pasos");
+  ok(/Descargar la app/.test(doc().querySelector(".sheet").textContent), "título de la hoja");
+  ok(doc().querySelectorAll(".sheet .pasos-lista li").length >= 2, "faltan los pasos");
+  doc().querySelector(".sheet .btn").click();
+  await dormir(100);
+  igual(doc().querySelectorAll(".tab").length, 5, "pestañas");
+});
+/* Gemini simulado dentro del iframe: responde por SSE como cliente, como coach (pista) o con la evaluación en JSON */
+function simularIA(win){
+  var vueltas = 0, original = win.fetch.bind(win);
+  win.fetch = async function(url, op){
+    if (String(url).indexOf("generativelanguage.googleapis.com") < 0) return original(url, op);
+    var body = JSON.parse(op.body), sis = body.systemInstruction.parts[0].text, ult = body.contents[body.contents.length - 1].parts[0].text;
+    var texto;
+    if (/coach/i.test(sis) && /TAREA: califica/.test(ult)) texto = '{"nota": 8, "criterios": {"apertura": true, "preguntas": true, "argumento": true, "objeciones": true, "canasta": false, "cierre": true}, "descubrio": true, "resultado": "compró", "bien": "Preguntaste antes de ofrecer.", "mejorar": "Ofrece el filtro.", "frase": "¿Qué le piden sus clientes?"}';
+    else if (/coach/i.test(sis)) texto = "Pregúntale qué le piden sus clientes.";
+    else { vueltas++; texto = vueltas < 2 ? "Aquí sale más el 20W-50. ¿A cuánto me lo deja?" : "Bueno, mándeme eso. [FIN]"; }
+    var enc = new TextEncoder();
+    var stream = new win.ReadableStream({ start: function(c){
+      c.enqueue(enc.encode("data: " + JSON.stringify({ candidates: [{ content: { parts: [{ text: texto }] }, finishReason: "STOP" }] }) + "\n\n"));
+      c.close();
+    } });
+    return new win.Response(stream, { status: 200, headers: { "content-type": "text/event-stream" } });
+  };
+}
+prueba("Hablar: conversación con un cliente de IA, pista del coach y evaluación (IA simulada)", async function(){
+  localStorage.setItem("austrofil.geminiKey", "clave-falsa-solo-para-pruebas");
+  await abrir("#/hablar");
+  simularIA(F.contentWindow);
+  ok(!doc().querySelector(".aviso-ia"), "pide activar la IA aunque hay clave");
+  igual(doc().querySelectorAll(".cliente-card").length, DATA.clientes.clientes.length, "clientes en la lista");
+  clic('[data-cliente="taller"]'); await dormir(80);
+  clic('[data-dif="facil"]'); await dormir(80);
+  clic("#empezar-charla");
+  await esperar(function(){ return doc().querySelector("#chat-texto"); }, 3000, "la conversación");
+  ok(/Maestro Jorge/.test(doc().querySelector("#chat").textContent), "el cliente no abrió la conversación");
+  async function decir(t){
+    var ta = doc().querySelector("#chat-texto");
+    ta.value = t; ta.dispatchEvent(new F.contentWindow.Event("input"));
+    clic("#chat-enviar");
+    await esperar(function(){ return !doc().querySelector(".msg p.dots") && doc().querySelectorAll(".msg-cliente").length > 0; }, 4000, "la respuesta del cliente");
+    await dormir(120);
+  }
+  await decir("Buenas, maestro. ¿Qué carros le llegan más al taller?");
+  clic("#pista");
+  await esperar(function(){ return doc().querySelector(".pista"); }, 3000, "la pista del coach");
+  await decir("Le propongo el aceite que pide el manual de esos carros, con su filtro.");
+  await esperar(function(){ return doc().querySelector("#evaluar-charla"); }, 3000, "el fin de la charla");
+  clic("#evaluar-charla");
+  await esperar(function(){ return doc().querySelector("#evaluacion"); }, 4000, "la evaluación");
+  ok(/8\/10/.test(doc().querySelector("#evaluacion").textContent), "nota del coach");
+  var perf = JSON.parse(localStorage.getItem("academia.perfiles")), d = JSON.parse(localStorage.getItem("academia.p." + perf.activo));
+  igual(d.progreso.charlas.length, 1, "la conversación no quedó guardada");
+  localStorage.removeItem("austrofil.geminiKey");
 });
 
 /* ============ CORRER ============ */

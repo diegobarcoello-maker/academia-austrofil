@@ -81,6 +81,10 @@ input,textarea{font:inherit;color:inherit}
 .offline{display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:var(--steel-wash);color:var(--steel);
   font-size:12.5px;font-weight:600;white-space:nowrap}
 .offline .ico{width:16px;height:16px}
+.btn-instalar{display:flex;align-items:center;gap:6px;min-height:40px;padding:0 12px;border-radius:999px;background:var(--amber);color:var(--on-amber);
+  font-size:13.5px;font-weight:600;white-space:nowrap;box-shadow:var(--shadow)}
+.btn-instalar .ico{width:18px;height:18px}
+@media (max-width:359px){ .btn-instalar span{display:none} .btn-instalar{padding:0 10px;min-width:44px;justify-content:center} }
 .perfil-chip{width:44px;height:44px;border-radius:50%;background:var(--amber-wash);color:var(--amber-ink);display:grid;place-items:center;
   font-family:var(--f-mono);font-weight:600;font-size:14px;border:1.5px solid color-mix(in srgb,var(--amber) 35%,transparent)}
 body.sesion .appbar{display:none}
@@ -130,8 +134,8 @@ body.sesion .actionbar{bottom:0;padding-bottom:calc(12px + var(--safe-b))}
 /* ===== pestañas abajo ===== */
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:55;background:var(--surface);border-top:1px solid var(--rule);padding-bottom:var(--safe-b)}
 body.sesion .tabbar{display:none}
-.tabbar-in{max-width:720px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);height:var(--tabbar)}
-.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:12.5px;font-weight:600;color:var(--ink-3);position:relative;text-align:center}
+.tabbar-in{max-width:720px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);height:var(--tabbar)}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:12px;font-weight:600;color:var(--ink-3);position:relative;text-align:center;min-width:0}
 .tab .ico{width:24px;height:24px}
 .tab.on{color:var(--amber-ink)}
 .tab.on::before{content:"";position:absolute;top:0;left:26%;right:26%;height:3px;border-radius:0 0 3px 3px;background:var(--amber)}
@@ -415,6 +419,60 @@ body.sesion .tabbar{display:none}
 .vacio{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;color:var(--ink-2);padding:30px 10px}
 .vacio .ico{width:40px;height:40px;color:var(--ink-3)}
 
+/* ===== hablar: conversación con un cliente de IA ===== */
+.charla-stats{margin-bottom:4px}
+.seg-dif button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:58px;padding:6px 4px;line-height:1.2}
+.seg-dif small{font-size:12px;font-weight:500;color:var(--ink-2)}
+.seg-dif button.on small{color:var(--amber-ink)}
+.clientes{display:grid;grid-template-columns:1fr;gap:10px}
+@media (min-width:560px){ .clientes{grid-template-columns:1fr 1fr} }
+.cliente-card{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;min-height:76px;text-align:left;background:var(--surface);
+  border:1.5px solid var(--rule);border-radius:14px}
+.cliente-card.on{border-color:var(--amber);background:var(--amber-wash)}
+.cc-ico{flex:0 0 auto;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--amber-wash);color:var(--amber-ink)}
+.cliente-card.on .cc-ico{background:var(--amber);color:var(--on-amber)}
+.cc-ico .ico{width:24px;height:24px}
+.cc-tx{flex:1;min-width:0}
+.cc-tx b{display:block;font-family:var(--f-tit);font-variation-settings:"wdth" 108,"wght" 720;font-size:16.5px;line-height:1.25}
+.cc-tx span{display:block;font-size:13.5px;color:var(--ink-2);margin-top:2px}
+.cc-nota{font-family:var(--f-mono);font-size:13px;font-weight:600;color:var(--ok);white-space:nowrap}
+.interruptor{display:flex;align-items:center;gap:10px;margin-top:16px;min-height:44px;font-size:15px;font-weight:600;cursor:pointer}
+.interruptor input{width:22px;height:22px;accent-color:var(--amber)}
+.aviso-ia{margin-top:6px;border-color:var(--amber)}
+.aviso-ia .row .ico{color:var(--amber-ink)}
+.aviso-ia .btn{align-self:flex-start}
+.charla-top{gap:8px}
+.charla-quien{flex:1;min-width:0;display:flex;align-items:center;gap:10px}
+.charla-quien .cc-ico{width:38px;height:38px}
+.charla-quien b{display:block;font-size:16px;line-height:1.2}
+.charla-quien span{display:block;font-size:13px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qx.on{color:var(--amber-ink);background:var(--amber-wash)}
+.qx[disabled]{opacity:.4;cursor:default}
+.chat{display:flex;flex-direction:column;gap:10px;padding:8px 0 4px}
+.msg{max-width:86%;padding:10px 13px 11px;border-radius:16px;font-size:16px;line-height:1.45}
+.msg p{margin:0;white-space:pre-wrap}
+.msg-quien{display:block;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;margin-bottom:2px}
+.msg-cliente{align-self:flex-start;background:var(--surface);border:1px solid var(--rule);border-bottom-left-radius:4px}
+.msg-cliente .msg-quien{color:var(--amber-ink)}
+.msg-asesor{align-self:flex-end;background:var(--amber-wash);border-bottom-right-radius:4px}
+.msg-asesor .msg-quien{color:var(--ink-2);text-align:right}
+.msg p.dots{animation:parpadeo 1s infinite}
+.nota-sistema{align-self:center;text-align:center;font-size:13px;color:var(--ink-3);max-width:90%}
+.nota-sistema.fuerte{color:var(--ink);font-weight:600}
+.pista{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:var(--steel-wash);color:var(--ink);font-size:15px}
+.pista > .ico{width:22px;height:22px;color:var(--steel);flex:0 0 auto}
+.chat-fila{display:flex;align-items:flex-end;gap:8px}
+.chat-inp{min-height:50px;max-height:140px;resize:none;padding:12px 14px;line-height:1.4;overflow-y:auto}
+.chat-btn{flex:0 0 auto;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--rule-strong);background:var(--surface);color:var(--ink)}
+.chat-btn .ico{width:22px;height:22px}
+.chat-btn.enviar{background:var(--amber);border-color:var(--amber);color:var(--on-amber)}
+.chat-btn[disabled]{opacity:.45;cursor:default}
+.chat-btn.mic.on{background:var(--warn);border-color:var(--warn);color:#fff;animation:escuchando 1.2s ease-in-out infinite}
+@keyframes escuchando{50%{box-shadow:0 0 0 8px color-mix(in srgb,var(--warn) 25%,transparent)}}
+.chat-terminar{align-self:center;width:auto;min-height:40px}
+.evaluacion{border-color:var(--steel)}
+.eval-nota{font-size:26px}
+
 /* ===== formularios ===== */
 .field{display:flex;flex-direction:column;gap:7px}
 .field label{font-size:14.5px;font-weight:600}
@@ -457,7 +515,7 @@ canvas.cert{width:100%;height:auto;border-radius:12px;border:1px solid var(--rul
 
 /* ===== computadora: con mouse, todo lo que se toca reacciona al pasar por encima ===== */
 @media (hover: hover) and (pointer: fine){
-  .lchip:hover,.nodo:not([disabled]):hover,.simcard:hover,.mrow:hover,.perfil-fila:hover,.etapa-cab:hover,.seg2 button:not(.on):hover{
+  .lchip:hover,.nodo:not([disabled]):hover,.simcard:hover,.mrow:hover,.perfil-fila:hover,.etapa-cab:hover,.seg2 button:not(.on):hover,.cliente-card:not(.on):hover{
     background:color-mix(in srgb,var(--surface-2) 60%,var(--surface))}
   .opt:not([disabled]):not(.sel):hover,.mi:not([disabled]):not(.sel):hover,.seg button:not(.on):hover{border-color:var(--amber)}
   .btn:not([disabled]):hover{filter:brightness(1.07)}

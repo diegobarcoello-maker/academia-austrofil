@@ -3,8 +3,8 @@
    - Cada vez que la app vuelve a primer plano con señal, el service worker mira si hay una versión publicada
      más nueva y aparece el aviso «Actualizar».
    - En Android, Chrome ofrece instalarla como app (beforeinstallprompt): se muestra el botón «Instalar». */
-import { $ } from "./util.js";
-import { toast } from "./ui.js";
+import { $, h, EQUIPO } from "./util.js";
+import { toast, hoja } from "./ui.js";
 
 var V = window.VERSION;
 var actualizando = false, nuevaVersion = 0, instalador = null, oyentes = [];
@@ -79,4 +79,47 @@ export function instalar(){
   instalador.userChoice.then(function(){ instalador = null; avisar(); }, function(){});
 }
 export function alCambiarInstalacion(fn){ oyentes.push(fn); }
-function avisar(){ oyentes.forEach(function(f){ f(); }); }
+function avisar(){ pintarBoton(); oyentes.forEach(function(f){ f(); }); }
+
+/* ============ BOTÓN «DESCARGAR APP» (siempre a la vista, en celular y en computadora) ============ */
+/* Si el navegador ofrece instalar (Chrome o Edge), se instala con un toque; si no, se explican los pasos de ese equipo. */
+function plataforma(){
+  var ua = navigator.userAgent || "";
+  if (/iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) return "ios";
+  if (/Android/i.test(ua)) return /SamsungBrowser/i.test(ua) ? "samsung" : /Firefox/i.test(ua) ? "otro" : "android";
+  if (/Edg\//.test(ua)) return "edge";
+  if (/Firefox/i.test(ua)) return "otro";
+  if (/Chrome|CriOS/i.test(ua)) return "chrome";
+  if (/Safari/i.test(ua)) return "mac";
+  return "otro";
+}
+var PASOS = {
+  android: ["Toca el menú ⋮ (arriba a la derecha de Chrome).", "Elige «Instalar app» o «Agregar a la pantalla principal».", "Confirma. La gota de la Academia queda en tu pantalla de inicio."],
+  samsung: ["Toca el menú ≡ (abajo a la derecha).", "Elige «Añadir página a» y luego «Pantalla de inicio».", "Confirma. La gota de la Academia queda en tu pantalla de inicio."],
+  ios: ["Abre este link en Safari.", "Toca Compartir (el cuadrado con la flecha hacia arriba).", "Elige «Agregar a pantalla de inicio» y toca «Agregar»."],
+  chrome: ["En la barra de direcciones, a la derecha, toca el ícono de instalar (una pantalla con una flecha).", "Si no lo ves: menú ⋮ › «Transmitir, guardar y compartir» › «Instalar página como aplicación».", "Confirma con «Instalar». Queda como programa en tu computadora."],
+  edge: ["Toca el menú … (arriba a la derecha).", "Elige «Aplicaciones» › «Instalar este sitio como una aplicación».", "Confirma con «Instalar»."],
+  mac: ["En Safari, abre el menú Archivo.", "Elige «Agregar al Dock»."],
+  otro: ["Este navegador no instala apps web.", "Abre el link en Chrome (en el celular) o en Chrome o Edge (en la computadora) y toca otra vez «Descargar app»."]
+};
+export function abrirInstalar(){
+  if (instalada()){ toast("La app ya está instalada en " + EQUIPO.este + "."); return; }
+  if (instalador){ instalar(); return; }
+  var cerrar = hoja([
+    h("h2", null, "Descargar la app"),
+    h("p", { class: "muted" }, "Queda con su ícono en " + EQUIPO.tu + ", se abre como una app y funciona sin internet. No ocupa casi espacio."),
+    h("ol", { class: "pasos-lista" }, PASOS[plataforma()].map(function(p){ return h("li", null, p); })),
+    h("div", { class: "btns" }, h("button", { class: "btn", onclick: function(){ cerrar(true); } }, "Entendido"))
+  ]);
+}
+function pintarBoton(){
+  var b = $("#btn-instalar");
+  if (b) b.hidden = instalada();
+}
+export function iniciarBotonInstalar(){
+  var b = $("#btn-instalar");
+  if (!b) return;
+  b.addEventListener("click", abrirInstalar);
+  pintarBoton();
+  try { window.matchMedia("(display-mode: standalone)").addEventListener("change", pintarBoton); } catch (e){}
+}

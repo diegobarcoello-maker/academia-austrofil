@@ -6,7 +6,7 @@
    No hay que tocar código: la app y el service worker leen el catálogo. */
 import { palabras } from "./util.js";
 
-export const DATA = { manual: {}, lineas: [], contextoIA: [] };
+export const DATA = { manual: {}, lineas: [], contextoIA: [], clientes: { dificultades: [], clientes: [] } };
 export const LEC = {};    /* lecciones por id (11-L01…) */
 export const PREG = {};   /* preguntas del banco fijo por id (11-L01-P1…) */
 export const SIM = {};    /* casos de mostrador y objeciones por id (11-C01, 11-O1…) */
@@ -21,8 +21,11 @@ async function traer(url){
 }
 
 export async function cargarDatos(){
-  var res = await Promise.all([traer("datos/lineas.json"), traer("datos/manual.json")]);
+  var res = await Promise.all([traer("datos/lineas.json"), traer("datos/manual.json"),
+    traer("datos/clientes.json").catch(function(){ return null; })]);
   var cat = res[0], manual = res[1];
+  /* clientes para conversar con la IA (pestaña Hablar); si faltara el archivo, la pestaña lo avisa */
+  if (res[2] && Array.isArray(res[2].clientes)) DATA.clientes = { dificultades: res[2].dificultades || [], clientes: res[2].clientes };
   indexarManual(manual);
   DATA.manual = manual.manual || {};
   /* apoyo para la IA: las líneas del contexto del manual que hablan del portafolio y de lubricantes */

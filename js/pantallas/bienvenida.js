@@ -3,6 +3,7 @@ import { h, add, icon, limpio, EQUIPO } from "../util.js";
 import { hayPerfil, crearPerfil, pedirPersistencia } from "../estado.js";
 import { app, barra } from "../ui.js";
 import { registrar, ir } from "../nav.js";
+import { abrirInstalar, instalada } from "../pwa.js";
 
 function pantallaBienvenida(){
   if (hayPerfil()){ ir("ruta"); return; }
@@ -26,6 +27,8 @@ function pantallaBienvenida(){
       h("li", null, icon("ruta"), "Una ruta por niveles, de lo básico a vender"),
       h("li", null, icon("sin-senal"), "Funciona sin internet"),
       h("li", null, icon("check"), "Tu avance queda en " + EQUIPO.este)),
+    instalada() ? null : h("button", { class: "btn sec small", id: "bienvenida-instalar", type: "button", onclick: abrirInstalar },
+      icon("descargar"), "Descargar la app en " + EQUIPO.tu),
     h("div", { class: "field" }, h("label", { for: "nombre" }, "¿Cómo te llamas?"), inp,
       h("p", { class: "tiny" }, "Va en tu certificado y en el reporte de avance que mandas a tu supervisor.")),
     aviso));

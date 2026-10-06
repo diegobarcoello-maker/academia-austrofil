@@ -30,7 +30,8 @@ export function normalizar(d){
     v: 2,
     linea: d.linea || null,
     progreso: { lecciones: p.lecciones || {}, examenes: p.examenes || {}, stats: p.stats || {},
-                sims: p.sims || p.objeciones || {}, pruebas: p.pruebas || {} },
+                sims: p.sims || p.objeciones || {}, pruebas: p.pruebas || {},
+                charlas: Array.isArray(p.charlas) ? p.charlas : [] },
     repaso: { items: r.items || {}, fijas: r.fijas || {}, dia: r.dia || "", hechas: r.hechas || 0, hecho: r.hecho || "" },
     racha: { dias: ra.dias || 0, ultimo: ra.ultimo || "", mejor: ra.mejor || 0 },
     actividad: d.actividad && typeof d.actividad === "object" ? d.actividad : {}
@@ -248,6 +249,24 @@ export function temasFlojos(l){
   }); });
   out.sort(function(a, b){ return b.r - a.r || b.c - a.c; });
   return out.slice(0, 3).map(function(x){ return x.modulo; });
+}
+
+/* ============ CONVERSACIONES CON CLIENTES (pestaña Hablar) ============ */
+/* r = { c: cliente, d: dificultad, n: nota 0-10, f: fecha, r: resultado }; se guardan las últimas 40 */
+export function guardarCharla(r){
+  var a = ST.d.progreso.charlas;
+  a.push(r);
+  if (a.length > 40) a.splice(0, a.length - 40);
+}
+export function resumenCharlas(d){
+  var a = ((d || ST.d).progreso.charlas || []).filter(function(x){ return typeof x.n === "number"; });
+  if (!a.length) return { n: 0, prom: 0, mejor: 0 };
+  var suma = a.reduce(function(s, x){ return s + x.n; }, 0);
+  return { n: a.length, prom: Math.round(suma / a.length * 10) / 10, mejor: Math.max.apply(null, a.map(function(x){ return x.n; })) };
+}
+export function mejorCharla(clienteId){
+  var a = ST.d.progreso.charlas.filter(function(x){ return x.c === clienteId && typeof x.n === "number"; });
+  return a.length ? Math.max.apply(null, a.map(function(x){ return x.n; })) : null;
 }
 
 /* ============ RACHA Y DÍAS DE ESTUDIO ============ */
