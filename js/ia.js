@@ -14,7 +14,12 @@ var chatlog = document.createElement("div");   /* contenedor que streamGem despl
 var ckeyin = null, ckeysave = null, ckeydel = null, ckeyst = null;
 var alCambiar = [];
 
-export function hayIA(){ return !!gemKey; }
+/* IA del equipo: un Worker de Cloudflare guarda la clave de Gemini de Diego (tools/worker-ia/worker.js).
+   Sin clave propia, la app le pregunta a ese servidor: ningún asesor tiene que sacar clave.
+   Con clave propia (Yo › Ajustes e IA), la app habla directo con Gemini y usa su propio cupo. */
+export var IA_EQUIPO = "https://academia-ia.diegobarcoello.workers.dev";
+export function hayIA(){ return !!gemKey || !!IA_EQUIPO; }
+export function usaIAEquipo(){ return !gemKey && !!IA_EQUIPO; }
 export function cuandoCambieIA(fn){ alCambiar.push(fn); }
 function setMode(){ alCambiar.forEach(function(f){ f(!!gemKey); }); }
 window.addEventListener("storage", function(e){
@@ -227,7 +232,8 @@ function syncSet(){
   ckeydel.hidden = !gemKey;
   ckeyin.value = "";
   ckeyin.placeholder = gemKey ? maskKey(gemKey) : "Pega aquí tu clave (AIza…)";
-  keyMsg(gemKey ? "Gemini activo en este navegador: la Academia usa IA gratis." : "Sin clave: todo funciona con el banco fijo del manual.", gemKey ? "ok" : "");
+  keyMsg(gemKey ? "Tu clave de Gemini está activa en este navegador: usas tu propio cupo." :
+    IA_EQUIPO ? "Sin clave propia: usas la IA del equipo." : "Sin clave: todo funciona con el banco fijo del manual.", gemKey || IA_EQUIPO ? "ok" : "");
 }
 /* panel de Ajustes para pegar o quitar la clave */
 export function panelIA(){
@@ -241,18 +247,22 @@ export function panelIA(){
       " y entra con tu cuenta de Google (Gmail)."),
     h("li", null, "Toca ", h("b", null, "Create API key"), " (Crear clave de API) y copia la clave."),
     h("li", null, "Pégala aquí abajo y toca ", h("b", null, "Guardar"), "."));
+  var propia = [h("p", null, h("b", null, "Gratis con Google Gemini."), " Necesita internet y se configura una sola vez:"), guia,
+    ckeyin, h("div", { class: "btns2" }, ckeysave, ckeydel), ckeyst];
   var box = h("div", { class: "card stack", id: "cset" },
-    h("p", null, h("b", null, "Gratis con Google Gemini."), " Necesita internet y se configura una sola vez:"), guia,
-    ckeyin, h("div", { class: "btns2" }, ckeysave, ckeydel), ckeyst,
-    h("p", { class: "tiny" }, "Sin tarjeta y sin costo, con un cupo diario. Con IA: te explica por qué fallaste, califica tus respuestas libres en el Mostrador y crea preguntas de práctica (marcadas «Pregunta IA», que no cuentan para aprobar). " +
-      "La clave queda solo en este navegador y es la misma que usa aquí el Manual de Campo. La IA nunca recibe tu nombre; en el plan gratis Google puede usar lo que envías para mejorar sus productos: no escribas datos de clientes."));
+    IA_EQUIPO ? [
+      h("p", null, h("b", null, "IA del equipo activa."), " No tienes que hacer nada: la IA funciona con internet y sin clave."),
+      h("details", { class: "propia", open: gemKey ? true : null }, h("summary", null, "Usar mi propia clave de Gemini (opcional)"), h("div", { class: "stack" }, propia))
+    ] : propia,
+    h("p", { class: "tiny" }, "Con IA: conversas con clientes en Hablar, te explica por qué fallaste, califica tus respuestas libres en el Mostrador y crea preguntas de práctica (marcadas «Pregunta IA», que no cuentan para aprobar). " +
+      "Una clave propia queda solo en este navegador y es la misma que usa aquí el Manual de Campo. La IA nunca recibe tu nombre; en el plan gratis Google puede usar lo que envías para mejorar sus productos: no escribas datos de clientes."));
   ckeysave.addEventListener("click", saveKey);
   ckeyin.addEventListener("keydown", function(e){ if (e.key === "Enter"){ e.preventDefault(); saveKey(); } });
   ckeydel.addEventListener("click", function(){
     gemKey = ""; gemCool = {}; gemNoThink = {};
     lsSet(GEM_STORE, ""); lsSet(GEM_MODELS, "");
     setMode(); syncSet();
-    keyMsg("Clave borrada de este navegador (también la del Manual de Campo aquí). Todo sigue con el banco fijo.");
+    keyMsg("Clave borrada de este navegador (también la del Manual de Campo aquí). " + (IA_EQUIPO ? "Sigues con la IA del equipo." : "Todo sigue con el banco fijo."));
   });
   syncSet();
   return box;
@@ -272,6 +282,7 @@ function pedirGem(modo, texto, out, caja){
 async function consultar(modo, contents, out, caja){
   iaModo = modo;
   chatlog = caja || out;
+  if (usaIAEquipo()) return consultarEquipo(contents, out);
   var st = { text: "" }, res = null, last = null;
   if (ctl) try { ctl.abort(); } catch (_){}
   ctl = new AbortController();
@@ -308,6 +319,37 @@ async function consultar(modo, contents, out, caja){
   if (!st.text.trim()) throw { gem: res && (res.blocked || /SAFETY|PROHIBITED|BLOCKLIST|SPII|RECITATION/.test(res.fin)) ? "refused" : "empty" };
   return { text: st.text, fin: res && res.fin, cut: !!last };
 }
+/* misma consulta, pero al servidor del equipo (responde de una vez, sin ir escribiendo) */
+async function consultarEquipo(contents, out){
+  if (ctl) try { ctl.abort(); } catch (_){}
+  ctl = new AbortController();
+  var cuerpo = {
+    sistema: iaInstr(),
+    mensajes: contents.map(function(c){
+      return { rol: c.role === "model" ? "model" : "user", texto: (c.parts || []).map(function(p){ return p.text || ""; }).join("") };
+    }),
+    max: iaModo === "libre" || iaModo === "generar" ? 1500 : 1024
+  };
+  var r, d = null;
+  try {
+    r = await fetch(IA_EQUIPO, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(cuerpo), signal: ctl.signal });
+  } catch (e){
+    if (e && e.name === "AbortError") throw e;
+    throw { equipo: true, status: 0 };
+  }
+  try { d = await r.json(); } catch (_){}
+  if (!r.ok || !d || !d.texto) throw { equipo: true, status: r.status, codigo: d && d.error };
+  out.classList.remove("dots");
+  out.textContent = plainAI(d.texto);
+  return { text: d.texto, fin: "STOP", cut: false };
+}
+function textoErrorEquipo(e){
+  if (!e.status) return "No hay conexión con la IA del equipo. Revisa tu internet.";
+  if (e.status === 429) return "La IA del equipo está muy pedida en este momento. Espera un minuto e intenta otra vez.";
+  if (e.status === 401) return "La IA del equipo pide un código. Avísale a tu supervisor.";
+  if (e.status === 403) return "Esta página no está autorizada para usar la IA del equipo. Ábrela desde el link oficial.";
+  return "La IA del equipo no respondió. Intenta en un rato.";
+}
 function sacarJSON(t){
   t = String(t || "").trim().replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/, "").trim();
   var a = t.search(/[\[{]/), z = Math.max(t.lastIndexOf("]"), t.lastIndexOf("}"));
@@ -325,6 +367,7 @@ function quitarNombre(t){
 }
 function mensajeError(e, extra){
   if (e && e.formato) return "La IA respondió en un formato que no pude leer. Intenta otra vez." + (extra ? " " + extra : "");
+  if (e && e.equipo) return textoErrorEquipo(e) + (extra ? " " + extra : "");
   /* los textos vienen del manual, donde la IA se configura con un botón arriba; aquí está en Yo › Ajustes e IA */
   var t = gemErrorText(e || {}).replace(/con el botón de IA(, arriba a la derecha)?/g, "en Yo › Ajustes e IA");
   return t + (extra ? " " + extra : "");

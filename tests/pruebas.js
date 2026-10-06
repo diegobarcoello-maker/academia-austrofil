@@ -363,6 +363,114 @@ prueba("Hablar: conversación con un cliente de IA, pista del coach y evaluació
   localStorage.removeItem("austrofil.geminiKey");
 });
 
+/* el servidor del equipo (tools/worker-ia/worker.js) probado aquí mismo, con una IA de Cloudflare y un Gemini simulados.
+   Se le pasa un pedido armado a mano porque el navegador no deja poner el encabezado Origin en un Request. */
+prueba("IA del equipo (servidor): solo los sitios de la Academia, Gemini primero y respaldo de Cloudflare", async function(){
+  var w = (await import("../tools/worker-ia/worker.js")).default;
+  var ORIGEN = "https://academia-austrofil.pages.dev";
+  function pedido(origen, cuerpo, metodo, ruta){
+    var hs = { origin: origen || null, "content-type": "application/json" };
+    return { method: metodo || "POST", url: "https://academia-ia.test" + (ruta || "/"),
+             headers: { get: function(k){ return hs[String(k).toLowerCase()] || null; } },
+             json: async function(){ return cuerpo; } };
+  }
+  function enJSON(obj, estado){ return new Response(JSON.stringify(obj), { status: estado || 200, headers: { "content-type": "application/json" } }); }
+  function deGemini(texto){ return enJSON({ candidates: [{ content: { parts: [{ text: texto }] } }] }); }
+  var CLAVE_MALA = { error: { code: 400, message: "API key not valid. Please pass a valid API key." } };
+  var cuerpo = { sistema: "Eres un cliente.", mensajes: [{ rol: "user", texto: "Hola" }] };
+  var aiFalsa = { run: async function(modelo, op){ return { response: "Hola, ¿qué me trae? (" + op.messages.length + " mensajes)" }; } };
+  var r = await w.fetch(pedido(ORIGEN, null, "OPTIONS"), {});
+  igual([r.status, r.headers.get("Access-Control-Allow-Origin")], [204, ORIGEN], "permiso del navegador (CORS)");
+  r = await w.fetch(pedido("https://otro-sitio.com", cuerpo), { AI: aiFalsa });
+  igual(r.status, 403, "un sitio ajeno no debería poder usarla");
+  r = await w.fetch(pedido(ORIGEN, cuerpo), { AI: aiFalsa });
+  var d = await r.json();
+  igual([r.status, d.ia, d.texto], [200, "cloudflare", "Hola, ¿qué me trae? (2 mensajes)"], "sin clave usa la IA de Cloudflare");
+  var fetchReal = window.fetch;
+  try {
+    var enviados = [];
+    window.fetch = async function(url, op){ enviados.push(JSON.parse(op.body)); return deGemini("Respuesta de Gemini"); };
+    d = await (await w.fetch(pedido(ORIGEN, cuerpo), { GEMINI_KEY: "clave-falsa", AI: aiFalsa })).json();
+    igual([d.ia, d.texto], ["gemini", "Respuesta de Gemini"], "con clave usa Gemini");
+    var cfg = enviados[0].generationConfig;
+    igual([cfg.maxOutputTokens, cfg.thinkingConfig && cfg.thinkingConfig.thinkingLevel, "temperature" in cfg], [4096, "low", false],
+          "Gemini con espacio para pensar sin cortar la respuesta");
+    enviados = [];
+    window.fetch = async function(url, op){
+      var b = JSON.parse(op.body);
+      enviados.push(b);
+      return b.generationConfig.thinkingConfig ? enJSON({ error: { code: 400, message: "Thinking level is not supported for this model." } }, 400) : deGemini("Sin pensar");
+    };
+    d = await (await w.fetch(pedido(ORIGEN, cuerpo), { GEMINI_KEY: "clave-falsa" })).json();
+    igual([d.texto, enviados.length], ["Sin pensar", 2], "un modelo que no acepta «thinkingLevel» se repite sin esa opción");
+    var urls = [];
+    window.fetch = async function(url){
+      urls.push(String(url));
+      return urls.length === 1 ? enJSON({ error: { code: 404, message: "models/gemini-x is not found" } }, 404) : deGemini("Del segundo");
+    };
+    d = await (await w.fetch(pedido(ORIGEN, cuerpo), { GEMINI_KEY: "clave-falsa" })).json();
+    ok(d.texto === "Del segundo" && urls[0] !== urls[1], "un modelo que no existe pasa al siguiente");
+    urls = [];
+    window.fetch = async function(url){ urls.push(String(url)); return enJSON(CLAVE_MALA, 400); };
+    r = await w.fetch(pedido(ORIGEN, cuerpo), { GEMINI_KEY: "clave-falsa" });
+    d = await r.json();
+    ok(r.status === 502 && /API key not valid/.test(d.mensaje) && urls.length === 1, "clave mala: no dice el motivo de Google o insiste con otros modelos");
+    d = await (await w.fetch(pedido(ORIGEN, cuerpo), { GEMINI_KEY: "clave-falsa", AI: aiFalsa })).json();
+    igual(d.ia, "cloudflare", "clave mala con respaldo: debería responder la IA de Cloudflare");
+    window.fetch = async function(){ return enJSON({ models: [{ name: "models/gemini-2.5-flash" }, { name: "models/gemini-flash-latest" }, { name: "models/otro" }] }); };
+    d = await (await w.fetch(pedido(null, null, "GET", "/probar"), { GEMINI_KEY: "clave-falsa", AI: aiFalsa })).json();
+    igual([d.ia, d.respaldo, d.gemini.estado, d.gemini.modelos.join(",")], ["gemini", true, 200, "gemini-flash-latest,gemini-2.5-flash"],
+          "/probar dice qué modelos de la lista tiene la clave");
+    window.fetch = async function(){ return enJSON(CLAVE_MALA, 400); };
+    d = await (await w.fetch(pedido(null, null, "GET", "/probar"), { GEMINI_KEY: "clave-falsa" })).json();
+    ok(d.gemini.estado === 400 && /API key not valid/.test(d.gemini.mensaje), "/probar no avisa que la clave no sirve");
+    window.fetch = async function(){ return new Response("{}", { status: 429 }); };
+    r = await w.fetch(pedido(ORIGEN, cuerpo), { GEMINI_KEY: "clave-falsa", AI: aiFalsa });
+    d = await r.json();
+    igual([r.status, d.ia], [200, "cloudflare"], "sin cupo de Gemini pasa a la IA de Cloudflare");
+    r = await w.fetch(pedido(ORIGEN, cuerpo), { GEMINI_KEY: "clave-falsa" });
+    igual(r.status, 429, "sin cupo y sin respaldo avisa que espere");
+  } finally { window.fetch = fetchReal; }
+  r = await w.fetch(pedido(ORIGEN, { mensajes: [] }), { AI: aiFalsa });
+  igual(r.status, 400, "pedido vacío");
+  r = await w.fetch(pedido(ORIGEN, cuerpo), { AI: aiFalsa, CODIGO_EQUIPO: "austro" });
+  igual(r.status, 401, "con código del equipo, sin código no responde");
+});
+prueba("La app usa la IA del equipo sin clave propia y nunca le manda el nombre del asesor", async function(){
+  localStorage.removeItem("austrofil.geminiKey");
+  await abrir("#/hablar");
+  var pedidos = [], win = F.contentWindow, original = win.fetch.bind(win);
+  win.fetch = async function(url, op){
+    if (String(url).indexOf("academia-ia.diegobarcoello.workers.dev") < 0) return original(url, op);
+    var b = JSON.parse(op.body);
+    pedidos.push(b);
+    var texto = /coach/i.test(b.sistema)
+      ? '{"nota": 6, "criterios": {"preguntas": true}, "resultado": "pendiente", "bien": "Preguntaste.", "mejorar": "Ofrece la canasta.", "frase": "¿Qué le piden sus clientes?"}'
+      : "Aquí vendemos más que todo cosas de ferretería.";
+    return new win.Response(JSON.stringify({ texto: texto, ia: "gemini" }), { status: 200, headers: { "content-type": "application/json" } });
+  };
+  ok(!doc().querySelector(".aviso-ia"), "pide activar la IA aunque está la del equipo");
+  clic('[data-cliente="ferreteria"]'); await dormir(60);
+  clic("#empezar-charla");
+  await esperar(function(){ return doc().querySelector("#chat-texto"); }, 3000, "la conversación");
+  var nombreAsesor = JSON.parse(localStorage.getItem("academia.perfiles")).lista.filter(function(p){
+    return p.id === JSON.parse(localStorage.getItem("academia.perfiles")).activo; })[0].nombre;
+  async function decir(t){
+    var antes = doc().querySelectorAll(".msg-cliente").length, ta = doc().querySelector("#chat-texto");
+    ta.value = t; ta.dispatchEvent(new win.Event("input"));
+    clic("#chat-enviar");
+    await esperar(function(){ return doc().querySelectorAll(".msg-cliente").length > antes && !doc().querySelector(".msg p.dots"); }, 4000, "la respuesta");
+    await dormir(100);
+  }
+  await decir("Buenas, soy " + nombreAsesor + " de Austrofil. ¿Qué le piden más sus clientes?");
+  await decir("¿Y qué le preguntan que usted no tiene?");
+  clic("#terminar-charla");
+  await esperar(function(){ return doc().querySelector("#evaluacion"); }, 4000, "la evaluación");
+  ok(/6\/10/.test(doc().querySelector("#evaluacion").textContent), "nota del coach");
+  igual(pedidos[0].mensajes.map(function(m){ return m.rol; }).join(","), "user,model,user", "orden de la conversación");
+  ok(JSON.stringify(pedidos).indexOf(nombreAsesor) < 0, "el nombre del asesor llegó a la IA");
+});
+
 /* ============ CORRER ============ */
 async function correr(){
   var lista = document.getElementById("lista"), mal = 0;

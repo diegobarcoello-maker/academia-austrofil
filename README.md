@@ -3,7 +3,8 @@
 Tutor para que los asesores de Austrofil aprendan la canasta de productos con el texto del
 [Manual de Campo](https://diegobarcoello-maker.github.io/manual-austrofil/), practiquen casos de mostrador y se certifiquen.
 Arranca con la línea 11 (Lubricantes); las demás líneas se suman como datos.
-Sitio: https://diegobarcoello-maker.github.io/academia-austrofil/
+Sitio: https://academia-austrofil.pages.dev (Cloudflare, el link oficial) y https://diegobarcoello-maker.github.io/academia-austrofil/
+(GitHub Pages). Los dos se publican solos desde `main`.
 
 ## Qué hace
 
@@ -20,11 +21,12 @@ Sitio: https://diegobarcoello-maker.github.io/academia-austrofil/
   para Android, iPhone o computadora.
 - **Avance de cada asesor**: varios asesores pueden compartir un celular (cada uno con su nombre y su avance).
   Cada asesor manda su avance por WhatsApp y el supervisor lo pega en el **Panel del supervisor** (Yo › Panel del supervisor),
-  que arma la tabla del equipo. No hay servidor: todo queda en el celular de cada uno.
+  que arma la tabla del equipo. El avance no pasa por ningún servidor: queda en el celular de cada uno.
 - **Sin internet**: después de abrirla una vez con señal, funciona completa sin conexión (service worker).
   En Android se puede instalar en la pantalla de inicio.
-- **IA opcional** (Gemini, gratis con clave propia): explica errores, califica respuestas libres y crea preguntas de práctica
-  que no cuentan para aprobar. Sin clave todo funciona con el banco fijo.
+- **IA del equipo** (Gemini, sin que nadie saque clave): conversa en Hablar, explica errores, califica respuestas libres y
+  crea preguntas de práctica que no cuentan para aprobar. Pasa por el servidor `academia-ia` de Cloudflare (ver abajo).
+  Quien quiera puede usar su propia clave de Gemini (Yo › Ajustes). Sin internet, todo lo demás funciona con el banco fijo.
 
 ## Cómo está armado
 
@@ -39,7 +41,7 @@ js/estado.js               avance por asesor (localStorage academia.*), repaso, 
 js/nav.js, js/ui.js        navegación por #/… y piezas comunes
 js/quiz.js                 sesiones de preguntas (lección, examen, prueba de nivel, repaso, quiz rápido, IA)
 js/codigos.js              códigos de respaldo (AA1.…) y de avance para el supervisor (AV1.…)
-js/ia.js                   IA opcional con Gemini (bloque copiado del manual)
+js/ia.js                   IA con Gemini: la del equipo o una clave propia (bloque copiado del manual)
 js/pwa.js, sw.js           sin internet, aviso «Actualizar» e instalación
 js/pantallas/*.js          ruta, practicar, mostrador, hablar, yo, supervisor, bienvenida, revisar
 js/voz.js                  dictado con el micrófono y lectura en voz alta (pestaña Hablar)
@@ -49,6 +51,7 @@ datos/linea-11-lubricantes.json   niveles → módulos → lecciones → pregunt
 datos/manual.json          extracción del Manual de Campo (tools/extraer_manual.py)
 tests/pruebas.html         pruebas en el navegador
 tools/servidor.ps1         servidor local para Windows (solo PowerShell)
+tools/worker-ia/worker.js  servidor de la IA del equipo (Cloudflare Worker «academia-ia»)
 ```
 
 No hay paso de compilación: la app lee los JSON de `datos/` y el service worker los guarda para usarlos sin internet.
@@ -81,9 +84,21 @@ No hay paso de compilación: la app lee los JSON de `datos/` y el service worker
 Si agregas un archivo de código o de estilo, súmalo a `ARCHIVOS` en `sw.js` y a los `modulepreload` de `index.html`
 (la prueba «El service worker guarda todo…» avisa si falta).
 
+## IA del equipo (Cloudflare Worker «academia-ia»)
+
+- Dirección: https://academia-ia.diegobarcoello.workers.dev (la app la tiene en `IA_EQUIPO`, en `js/ia.js`).
+- La clave de Gemini vive solo en Cloudflare, como secreto `GEMINI_KEY` (Configuración › Variables y secretos).
+- Respaldo opcional: enlace (binding) **Workers AI** con el nombre `AI`; responde si Gemini se queda sin cupo.
+- Opcional: secreto `CODIGO_EQUIPO` para que solo responda a quien manda ese código.
+- Solo atiende a los sitios de `ORIGENES` (en `worker.js`): si la app se publica en otra dirección, súmala ahí.
+- Comprobar: https://academia-ia.diegobarcoello.workers.dev/probar dice si Google acepta la clave y qué modelos tiene (no gasta cupo).
+- Actualizar: Workers & Pages › academia-ia › Editar código, pegar `tools/worker-ia/worker.js` y Desplegar.
+  Solo se edita la última versión: si el editor no deja escribir, recarga la página.
+
 ## Reglas de contenido
 
 - Solo texto del Manual de Campo. Lo que el manual no trae no se inventa: se pide a quien lo mantiene.
 - Cada pregunta y cada paso llevan su cita del manual, comprobada letra por letra.
 
-No pongas claves, tokens ni teléfonos en el repo: es público. Cada asesor pega su clave de Gemini en la app y queda solo en su navegador.
+No pongas claves, tokens ni teléfonos en el repo: es público. La clave del equipo está solo en Cloudflare; una clave propia
+queda solo en el navegador de quien la pega.

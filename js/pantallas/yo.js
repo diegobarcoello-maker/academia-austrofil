@@ -185,7 +185,7 @@ function pantallaAjustes(args){
       h("div", { class: "field" }, h("label", { for: "ajuste-nombre" }, "Tu nombre (va en el certificado)"), inp),
       h("button", { class: "btn sec", id: "guardar-nombre", onclick: guardarNombre }, "Guardar nombre"), est),
     h("h2", { class: "hlabel" }, "Tema"), seg,
-    h("h2", { class: "hlabel", id: "ia" }, "Inteligencia artificial (opcional)"),
+    h("h2", { class: "hlabel", id: "ia" }, "Inteligencia artificial"),
     panelIA(),
     h("h2", { class: "hlabel" }, "Mi avance en " + EQUIPO.este),
     h("div", { class: "card stack" },
